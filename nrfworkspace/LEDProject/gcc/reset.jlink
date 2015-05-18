@@ -1,0 +1,4 @@
+device nrf51822_xxab
+w4 40000544 1
+r
+exit

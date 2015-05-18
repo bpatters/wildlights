@@ -1,0 +1,7 @@
+device nrf51822_xxab
+speed 1000
+r
+loadbin _build/LEDMain_s110_xxab.bin, 0x14000
+r
+g
+exit
