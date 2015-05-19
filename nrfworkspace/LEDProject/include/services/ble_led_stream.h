@@ -6,6 +6,7 @@
 
 //D4DCxxxx-83CD-4027-A5F3-D9D172A33130
 #define BLE_LED_STREAM_BASE_UUID {{0x30,0x31,0xA3,0x72,0xD1,0xD9,0xF3,0xA5,0x27,0x40,0xCD,0x83,0x00,0x00,0xDC,0xD4}}
+#define BLE_LED_STREAM_SERVICE_UUID {{0x30,0x31,0xA3,0x72,0xD1,0xD9,0xF3,0xA5,0x27,0x40,0xCD,0x83,0x77,0x77,0xDC,0xD4}}
 
 #define BLE_LED_STREAM_SERVICE 0x7777
 #define BLE_LED_STREAM_CHAR    0x7778
@@ -42,7 +43,8 @@ typedef struct _ble_led_stream_packet_t {
 
 typedef struct _ble_led_stream_t {
 	uint16_t						service_handle;
-	ble_gatts_char_handles_t		char_handles;
+	ble_gatts_char_handles_t		stream_handles;
+	ble_gatts_char_handles_t		sync_handles;
 	uint8_t							uuid_type;
 	uint16_t						conn_handle;
 	uint8_t                         led_strip_size;

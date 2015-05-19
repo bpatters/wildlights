@@ -17,14 +17,18 @@ static void on_disconnect(ble_led_stream_t * p_led_stream, ble_evt_t * p_ble_evt
 static void on_write(ble_led_stream_t * p_led_stream, ble_evt_t * p_ble_evt) {
 	ble_gatts_evt_write_t * p_evt_write = &p_ble_evt->evt.gatts_evt.params.write;
 
-	if ( p_evt_write->handle == p_led_stream->char_handles.value_handle)
+	if ( p_evt_write->handle == p_led_stream->stream_handles.value_handle)
 	{
 		// @TODO notify the main program that the strip was written to
 		//LEDStrip *newStrip = (LEDStrip *)p_evt_write->data;
 		ble_led_stream_packet_t *packet = (ble_led_stream_packet_t *) p_evt_write->data;
 		uint16_t offset = (((uint16_t)packet->offsetHigh & 0xFF) <<8) + (packet->offsetLow & 0xFF);
-				packet->offsetLow = offset;
-		memcpy(((uint8_t *)p_led_stream->led_strip)+offset, packet->data, p_evt_write->len-2);
+		if ( (offset >= 0) &&
+			 (offset < sizeof(LEDStrip)) &&
+			 ((offset+p_evt_write->len -2) < (sizeof(LEDStrip)) )
+			){
+			memcpy(((uint8_t *)p_led_stream->led_strip)+offset, packet->data, p_evt_write->len-2);
+		}
 	}
 }
 void ble_led_stream_on_ble_evt(ble_led_stream_t* p_led_stream, ble_evt_t* p_ble_evt)
@@ -75,6 +79,7 @@ static uint32_t ble_led_stream_sync_state_char_add(ble_led_stream_t * p_led_stre
 	memset(&char_md, 0, sizeof(char_md));
 
 	char_md.char_props.read  = 1;
+	char_md.char_props.notify = 1;
 	char_md.p_char_user_desc  = (uint8_t *)"Sync State";
 	char_md.p_char_pf         = NULL;
 	char_md.p_user_desc_md    = NULL;
@@ -104,7 +109,7 @@ static uint32_t ble_led_stream_sync_state_char_add(ble_led_stream_t * p_led_stre
 
 	err_code = sd_ble_gatts_characteristic_add(p_led_stream->service_handle, &char_md,
 			&attr_char_value,
-			&p_led_stream->char_handles);
+			&p_led_stream->sync_handles);
 	if (err_code != NRF_SUCCESS)
 	{
 		return err_code;
@@ -135,12 +140,11 @@ static uint32_t ble_led_stream_char_add(ble_led_stream_t * p_led_stream, const b
 	// According to BAS_SPEC_V10, the read operation on cccd should be possible without
 	// authentication.
 	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cccd_md.read_perm);
-	cccd_md.write_perm= p_led_stream_init->led_packet_char_attr_md.cccd_write_perm;
+	cccd_md.write_perm = p_led_stream_init->led_packet_char_attr_md.cccd_write_perm;
 	cccd_md.vloc = BLE_GATTS_VLOC_STACK;
 
 	memset(&char_md, 0, sizeof(char_md));
 
-	char_md.char_props.write_wo_resp = 1;
 	char_md.char_props.write = 1;
 	char_md.char_props.read  = 1;
 	char_md.p_char_user_desc  = (uint8_t *)"LEDStrip";
@@ -173,7 +177,7 @@ static uint32_t ble_led_stream_char_add(ble_led_stream_t * p_led_stream, const b
 
 	err_code = sd_ble_gatts_characteristic_add(p_led_stream->service_handle, &char_md,
 			&attr_char_value,
-			&p_led_stream->char_handles);
+			&p_led_stream->stream_handles);
 	if (err_code != NRF_SUCCESS)
 	{
 		return err_code;

@@ -4,7 +4,7 @@ CFLAGS += -DNRF51822_QFAA_C0
 PLATFORM=POSIX
 LDFLAGS += -D__HEAP_SIZE=0
 
-GNU_INSTALL_ROOT := /Users/bpatterson/Documents/nrfworkspace/gcc-arm-none-eabi-4_9-2015q1
+GNU_INSTALL_ROOT := /Users/bpatterson/Documents/workspace/wildlights/nrfworkspace/gcc-arm-none-eabi-4_9-2015q1
 GNU_VERSION := 4.7.4
 GNU_PREFIX := arm-none-eabi
 
@@ -31,7 +31,7 @@ C_SOURCE_FILES += ble_dis.c
 OUTPUT_FILENAME := LEDMain
 #SDK_PATH =c:/Nordic~1/NRF51S~1.335/Nordic/nrf51822/
 #SDK_PATH = z:/nrfworkspace/LEDProject/nrf51822/
-SDK_PATH = /Users/bpatterson/Documents/nrfworkspace/LEDProject/nrf51822/
+SDK_PATH = /Users/bpatterson/Documents/workspace/wildlights/nrfworkspace/LEDProject/nrf51822/
 
 
 INCLUDEPATHS += -I"${SDK_PATH}Include/ble"
@@ -54,6 +54,7 @@ JLINK_HOME=/usr/bin/
 JLINK_EXE=JLinkExe
 JLINK_GDBSERVER=JLinkGDBServer
 GDB=$(GNU_INSTALL_ROOT)/$(GNU_PREFIX)-gdb
+SOFTDEVICE=/Users/bpatterson/Documents/workspace/wildlights/nrfworkspace/LEDProject/softdevice/s110_nrf51822_5.2.1_softdevice.hex
 
 pin-reset:
 	$(JLINK_EXE) reset.jlink
@@ -65,3 +66,4 @@ erase-all:
 	$(JLINK_EXE) erase-all.jlink
 recover:
 	$(JLINK_EXE) recover.jlink
+	
