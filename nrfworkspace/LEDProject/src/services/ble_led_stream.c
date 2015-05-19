@@ -147,7 +147,7 @@ static uint32_t ble_led_stream_char_add(ble_led_stream_t * p_led_stream, const b
 
 	char_md.char_props.write = 1;
 	char_md.char_props.read  = 1;
-	char_md.p_char_user_desc  = (uint8_t *)"LEDStrip";
+	char_md.p_char_user_desc  = (uint8_t *)"";
 	char_md.p_char_pf         = NULL;
 	char_md.p_user_desc_md    = NULL;
 	char_md.p_cccd_md         = &cccd_md;
