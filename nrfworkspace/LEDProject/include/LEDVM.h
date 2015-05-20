@@ -6,28 +6,14 @@
 #include <stdbool.h>
 #include "platform.h"
 #include "global.h"
+#include "led_program.h"
 #include "led_strip.h"
 
-#define STATE_IDLE    0
-#define STATE_RUNNING 1
-#define STATE_PROGRAMMING 2
 
 // bitwise flag for different operations
 #define FLAG_EQ 0
 #define FLAG_GT 1
 #define FLAG_LT 2
-
-typedef struct _LEDProgram {
-	uint8_t state;        // 1 uint8_t state
-	uint16_t pc;          // 2 uint8_ts pc
-	uint16_t programSize; // 2 uint8_ts size
-	uint8_t program[1024];     // 2k of program space
-	LEDStrip strips[1];   // 4+ num leds*3
-	uint32_t sp;
-	uint32_t stack[16];
-	int32_t vars[32];    // 1k uint8_ts of 32 bit variables
-	uint32_t flags;    // 4 uint8_ts of flags
-} LEDProgram;
 
 typedef enum  {
 	INST_END,        // END Program

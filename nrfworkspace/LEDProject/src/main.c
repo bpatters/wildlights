@@ -45,17 +45,18 @@
 #include "ble_radio_notification.h"
 #include "ble_flash.h"
 #include "ble_debug_assert_handler.h"
+
+#include "../include/services/ble_led_program.h"
 #include "LEDMain.h"
 #include "global.h"
 #include "light_ws2812_cortex.h"
-#include "services/ble_led_stream.h"
 #include "LEDVM.h"
 #include "led_strip.h"
 
 #define BONDMNGR_DELETE_BUTTON_PIN_NO        HR_DEC_BUTTON_PIN_NO                      /**< Button used for deleting all bonded masters during startup. */
 
 #define DEVICE_NAME                          "WildLights"                       	   /**< Name of device. Will be included in the advertising data. */
-#define MANUFACTURER_NAME                    "Bret Patterson"                     /**< Manufacturer. Will be passed to Device Information Service. */
+#define MANUFACTURER_NAME                    "BP"                     /**< Manufacturer. Will be passed to Device Information Service. */
 #define APP_ADV_INTERVAL                     40                                        /**< The advertising interval (in units of 0.625 ms. This value corresponds to 25 ms). */
 #define APP_ADV_TIMEOUT_IN_SECONDS           180                                       /**< The advertising timeout in units of seconds. */
 
@@ -94,7 +95,7 @@
 static ble_gap_sec_params_t                  m_sec_params;                             /**< Security requirements for this application. */
 static ble_gap_adv_params_t                  m_adv_params;                             /**< Parameters to be passed to the stack when starting advertising. */
 ble_bas_t                                    bas;                                      /**< Structure used to identify the battery service. */
-ble_led_stream_t 					 		 led_stream;
+ble_led_program_t 					 		 led_program;
 static app_timer_id_t                        m_battery_timer_id;                       /**< Battery timer. */
 
 
@@ -250,8 +251,7 @@ static void advertising_init(void)
 
 	ble_uuid_t adv_uuids[] =
 	{
-			{BLE_UUID_BATTERY_SERVICE,            BLE_UUID_TYPE_BLE},
-			{BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUID_TYPE_BLE}
+			{BLE_LED_PROGRAM_SERVICE,            BLE_UUID_TYPE_BLE},
 	};
 
 	// Build and set advertising data
@@ -287,7 +287,7 @@ static void services_init(void)
 	uint32_t       err_code;
 	ble_bas_init_t bas_init;
 	ble_dis_init_t dis_init;
-	ble_led_stream_init_t led_stream_init;
+	ble_led_program_init_t led_program_init;
 
 	// Initialize Battery Service
 	memset(&bas_init, 0, sizeof(bas_init));
@@ -320,13 +320,20 @@ static void services_init(void)
 
 
 	// Initialize LED Streaming service
-	memset(&led_stream,0, sizeof(led_stream));
-	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&led_stream_init.led_packet_char_attr_md.read_perm);
-	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&led_stream_init.led_packet_char_attr_md.cccd_write_perm);
-	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&led_stream_init.led_packet_char_attr_md.write_perm);
-	led_stream_init.led_strip = &ledProgram.strips[0];
+	memset(&led_program,0, sizeof(led_program));
+	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&led_program_init.led_program_char_attr_md.cccd_write_perm);
+	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&led_program_init.led_program_char_attr_md.read_perm);
+	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&led_program_init.led_program_char_attr_md.write_perm);
+	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&led_program_init.led_stream_char_attr_md.cccd_write_perm);
+	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&led_program_init.led_stream_char_attr_md.read_perm);
+	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&led_program_init.led_stream_char_attr_md.write_perm);
+	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&led_program_init.led_stream_sync_char_attr_md.cccd_write_perm);
+	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&led_program_init.led_stream_sync_char_attr_md.read_perm);
+	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&led_program_init.led_stream_sync_char_attr_md.write_perm);
+	led_program_init.led_program = &ledProgram;
+	led_program_init.led_strip   = &ledProgram.strips[0];
 
-	err_code =ble_led_stream_init(&led_stream, &led_stream_init);
+	err_code =ble_led_program_init(&led_program, &led_program_init);
 	APP_ERROR_CHECK(err_code);
 }
 
@@ -472,6 +479,9 @@ static void on_ble_evt(ble_evt_t * p_ble_evt)
 
 		// Start timers used to generate battery and HR measurements.
 		application_timers_start();
+		if ((ledProgram.mode == MODE_RUN_WHEN_DISCONNECT) && (ledProgram.state == STATE_RUNNING)) {
+			setIdle(&ledProgram);
+		}
 		break;
 
 	case BLE_GAP_EVT_DISCONNECTED:
@@ -482,6 +492,10 @@ static void on_ble_evt(ble_evt_t * p_ble_evt)
 		// on disconnect restart advertising
 		//	system_off_mode_enter();
 		advertising_start();
+		// if we get disconnected check transition state
+		if (ledProgram.mode == MODE_RUN_WHEN_DISCONNECT) {
+			setRunning(&ledProgram);
+		}
 		break;
 
 	case BLE_GAP_EVT_SEC_PARAMS_REQUEST:
@@ -518,7 +532,7 @@ static void ble_evt_dispatch(ble_evt_t * p_ble_evt)
 {
 	ble_bondmngr_on_ble_evt(p_ble_evt);
 	ble_bas_on_ble_evt(&bas, p_ble_evt);
-	ble_led_stream_on_ble_evt(&led_stream, p_ble_evt);
+	ble_led_program_on_ble_evt(&led_program, p_ble_evt);
 	ble_conn_params_on_ble_evt(p_ble_evt);
 	on_ble_evt(p_ble_evt);
 }
@@ -549,26 +563,20 @@ int main(void)
 	radio_notification_init();
 	// Initialize Bluetooth Stack parameters
 	gap_params_init();
-	advertising_init();
 	services_init();
+	advertising_init();
 	conn_params_init();
 	sec_params_init();
 
 	// Actually start advertising
 	advertising_start();
 
-
-
 	led_init();
-
-
 	while(true)
 	{
-			sd_app_event_wait();
-//		runProgram(&ledProgram);
-		//while (ledProgram.strips[0].sync) {
-		//}
-
+		runProgram(&ledProgram);
+		while (ledProgram.strips[0].sync) {
+		}
 	}
 
 }

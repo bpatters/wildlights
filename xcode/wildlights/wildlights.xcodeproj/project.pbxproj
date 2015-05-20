@@ -15,10 +15,10 @@
 		2B1945821B07F4CC00C2DD92 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B1945801B07F4CC00C2DD92 /* LaunchScreen.xib */; };
 		2B19458E1B07F4CD00C2DD92 /* wildlightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19458D1B07F4CD00C2DD92 /* wildlightsTests.swift */; };
 		2B1945991B07F51900C2DD92 /* BTDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1945971B07F51900C2DD92 /* BTDiscovery.swift */; };
-		2B19459A1B07F51900C2DD92 /* BTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1945981B07F51900C2DD92 /* BTService.swift */; };
+		2B19459A1B07F51900C2DD92 /* WildLightsHeadUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1945981B07F51900C2DD92 /* WildLightsHeadUnit.swift */; };
 		2B19459E1B0805DE00C2DD92 /* LedStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19459D1B0805DE00C2DD92 /* LedStrip.swift */; };
 		2B1945A01B0806E900C2DD92 /* LedProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19459F1B0806E900C2DD92 /* LedProgram.swift */; };
-		2B1945A21B092A7900C2DD92 /* LEDStreamService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1945A11B092A7900C2DD92 /* LEDStreamService.swift */; };
+		2B1945A21B092A7900C2DD92 /* WildLightsStreaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1945A11B092A7900C2DD92 /* WildLightsStreaming.swift */; };
 		2B94F6F51B0A192C00D6DDB3 /* DesktopCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B94F6F41B0A192C00D6DDB3 /* DesktopCollectionViewController.swift */; };
 		2B94F6F81B0A1DF000D6DDB3 /* DeviceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B94F6F71B0A1DF000D6DDB3 /* DeviceCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -46,10 +46,10 @@
 		2B19458C1B07F4CC00C2DD92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B19458D1B07F4CD00C2DD92 /* wildlightsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wildlightsTests.swift; sourceTree = "<group>"; };
 		2B1945971B07F51900C2DD92 /* BTDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTDiscovery.swift; sourceTree = "<group>"; };
-		2B1945981B07F51900C2DD92 /* BTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTService.swift; sourceTree = "<group>"; };
+		2B1945981B07F51900C2DD92 /* WildLightsHeadUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WildLightsHeadUnit.swift; sourceTree = "<group>"; };
 		2B19459D1B0805DE00C2DD92 /* LedStrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LedStrip.swift; sourceTree = "<group>"; };
 		2B19459F1B0806E900C2DD92 /* LedProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LedProgram.swift; sourceTree = "<group>"; };
-		2B1945A11B092A7900C2DD92 /* LEDStreamService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEDStreamService.swift; sourceTree = "<group>"; };
+		2B1945A11B092A7900C2DD92 /* WildLightsStreaming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WildLightsStreaming.swift; sourceTree = "<group>"; };
 		2B94F6F41B0A192C00D6DDB3 /* DesktopCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesktopCollectionViewController.swift; sourceTree = "<group>"; };
 		2B94F6F71B0A1DF000D6DDB3 /* DeviceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,10 +93,9 @@
 		2B1945711B07F4CC00C2DD92 /* wildlights */ = {
 			isa = PBXGroup;
 			children = (
+				2B94F6FB1B0AD74A00D6DDB3 /* ble */,
 				2B94F6F61B0A1DC600D6DDB3 /* DesktopView */,
 				2B19459D1B0805DE00C2DD92 /* LedStrip.swift */,
-				2B1945971B07F51900C2DD92 /* BTDiscovery.swift */,
-				2B1945981B07F51900C2DD92 /* BTService.swift */,
 				2B1945741B07F4CC00C2DD92 /* AppDelegate.swift */,
 				2B1945791B07F4CC00C2DD92 /* ViewController.swift */,
 				2B19457B1B07F4CC00C2DD92 /* Main.storyboard */,
@@ -105,7 +104,6 @@
 				2B1945761B07F4CC00C2DD92 /* wildlights.xcdatamodeld */,
 				2B1945721B07F4CC00C2DD92 /* Supporting Files */,
 				2B19459F1B0806E900C2DD92 /* LedProgram.swift */,
-				2B1945A11B092A7900C2DD92 /* LEDStreamService.swift */,
 			);
 			path = wildlights;
 			sourceTree = "<group>";
@@ -142,6 +140,16 @@
 				2B94F6F71B0A1DF000D6DDB3 /* DeviceCollectionViewCell.swift */,
 			);
 			name = DesktopView;
+			sourceTree = "<group>";
+		};
+		2B94F6FB1B0AD74A00D6DDB3 /* ble */ = {
+			isa = PBXGroup;
+			children = (
+				2B1945971B07F51900C2DD92 /* BTDiscovery.swift */,
+				2B1945A11B092A7900C2DD92 /* WildLightsStreaming.swift */,
+				2B1945981B07F51900C2DD92 /* WildLightsHeadUnit.swift */,
+			);
+			name = ble;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,9 +261,9 @@
 				2B1945A01B0806E900C2DD92 /* LedProgram.swift in Sources */,
 				2B19457A1B07F4CC00C2DD92 /* ViewController.swift in Sources */,
 				2B1945781B07F4CC00C2DD92 /* wildlights.xcdatamodeld in Sources */,
-				2B19459A1B07F51900C2DD92 /* BTService.swift in Sources */,
+				2B19459A1B07F51900C2DD92 /* WildLightsHeadUnit.swift in Sources */,
 				2B19459E1B0805DE00C2DD92 /* LedStrip.swift in Sources */,
-				2B1945A21B092A7900C2DD92 /* LEDStreamService.swift in Sources */,
+				2B1945A21B092A7900C2DD92 /* WildLightsStreaming.swift in Sources */,
 				2B94F6F51B0A192C00D6DDB3 /* DesktopCollectionViewController.swift in Sources */,
 				2B1945991B07F51900C2DD92 /* BTDiscovery.swift in Sources */,
 				2B94F6F81B0A1DF000D6DDB3 /* DeviceCollectionViewCell.swift in Sources */,

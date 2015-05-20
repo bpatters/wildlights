@@ -11,16 +11,16 @@ import CoreBluetooth
 
 
 
-class LEDStreamService {
+class WildLightsStreaming {
     private var device : CBPeripheral
     var service : CBService
     var streamChar : CBCharacteristic?
     var syncChar : CBCharacteristic? {
         didSet {
             if (syncChar != nil) {
-                NSNotificationCenter.defaultCenter().removeObserver(LEDStreamCharUUIDString)
+                NSNotificationCenter.defaultCenter().removeObserver(WildLightsStreamingSyncStateCharUUIDString)
             }
-            NSNotificationCenter.defaultCenter().addObserverForName(LEDStreamCharUUIDString, object:nil, queue: nil) { note in
+            NSNotificationCenter.defaultCenter().addObserverForName(WildLightsStreamingSyncStateCharUUIDString, object:nil, queue: nil) { note in
                 let userData = (note.userInfo as NSDictionary!)
                 let value = self.syncChar!.value;
                 self.ready = UInt8(value.bytes[0]) == 0;
@@ -45,7 +45,7 @@ class LEDStreamService {
         
         writeData(NSData(bytes: [UInt8(0), UInt8(1), UInt8(1)], length: 3))
 
-        println ("Wrote \(data) to LED Strip Service: \(service.UUID) Char:\(streamChar?.UUID)")
+        println ("Wrote \(data) to LED Strip Service: Char:\(streamChar?.UUID)")
      
         //println ("Sample data \(sampleData)")
     }

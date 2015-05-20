@@ -424,7 +424,8 @@ void runProgram(LEDProgram* program) {
 	case INST_JMP:
 		program->pc++;
 		{
-			program->pc = readIMM16(program);
+			uint16_t newAddr = readIMM16(program);
+			program->pc = newAddr;
 			trace("jmp %d\n", program->pc);
 		}
 		break;
@@ -716,9 +717,8 @@ void exec_INST_ROTATEO(LEDProgram* program, uint8_t stripNum) {
 	*strip->pixels = r;
 	*(strip->pixels + 1) = g;
 	*(strip->pixels + 2) = b;
-	setPixelColor(strip,0, r, g, b);
-
 }
+
 void exec_INST_ROTATEI(LEDProgram* program, uint8_t stripNum) {
 
 	LEDStrip* strip = &program->strips[stripNum];

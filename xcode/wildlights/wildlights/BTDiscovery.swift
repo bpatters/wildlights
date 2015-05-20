@@ -6,7 +6,7 @@ let btDiscoverySharedInstance = BTDiscovery();
 class BTDiscovery: NSObject, CBCentralManagerDelegate {
     
     private var centralManager: CBCentralManager?
-    private var bleDevices: [NSUUID: (CBPeripheral, BTService?)] = [:]
+    private var bleDevices: [NSUUID: (CBPeripheral, WildLightsHeadUnit?)] = [:]
     
     override init() {
         super.init()
@@ -26,10 +26,11 @@ class BTDiscovery: NSObject, CBCentralManagerDelegate {
     func centralManager(central: CBCentralManager!, didDiscoverPeripheral peripheral: CBPeripheral!, advertisementData: [NSObject : AnyObject]!, RSSI: NSNumber!) {
         
         // Validate peripheral information
-        if ((peripheral == nil) || (peripheral.name == nil) || (peripheral.name == "")) {
+        if ((peripheral == nil) || (peripheral.name == nil) || (peripheral.name != "WildLights")) {
             return
         }
         
+
         // If not already connected to a peripheral, then connect to this one
         let deviceInfo  = self.bleDevices[peripheral.identifier]
         if (deviceInfo == nil || (deviceInfo!.0.state == CBPeripheralState.Disconnected)) {
@@ -49,7 +50,7 @@ class BTDiscovery: NSObject, CBCentralManagerDelegate {
         let deviceInfo  = self.bleDevices[peripheral.identifier]
         if (deviceInfo != nil) {
             let (device, service) = deviceInfo!
-            var btService = BTService(initWithPeripheral: peripheral)
+            var btService = WildLightsHeadUnit(initWithPeripheral: peripheral)
             
             bleDevices[peripheral.identifier] = (peripheral, btService)
             
