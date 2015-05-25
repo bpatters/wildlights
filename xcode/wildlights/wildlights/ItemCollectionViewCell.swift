@@ -8,8 +8,7 @@
 
 import UIKit
 
-class DeviceCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var labelView : UILabel?
-    
+class ItemCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var nameLabel : UILabel?
     
 }

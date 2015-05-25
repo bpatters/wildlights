@@ -40,34 +40,11 @@ void led_init() {
 	nrf_gpio_cfg_output(LED1_PIN);
     memset((void *) &ledProgram,0,sizeof(ledProgram));
 
-    static uint8_t testProgram[] =
-    {
-       8, 31, 0x00,0x00,0x00,0xFF,           //         movi r31,0x000000FF
-       8, 30, 0x00,0x00,0x00,0x01,           //         movi r30,0x00000001
-       8, 31, 0x00,0x00,0x00,0xFF,           //         movi r31,0x000000FF
-      52, 0x00, 31,                          //       pushcr 0x00,r31
-      58, 0x00,                              //       update 0x00
-       1, 0x00,0x21,                         //        delay 0x0021
-      26, 31, 0x08,                          //       shiftl r31,0x08
-      52, 0x00, 31,                          //       pushcr 0x00,r31
-      58, 0x00,                              //       update 0x00
-       1, 0x00,0x21,                         //        delay 0x0021
-      26, 31, 0x08,                          //       shiftl r31,0x08
-      52, 0x00, 31,                          //       pushcr 0x00,r31
-      58, 0x00,                              //       update 0x00
-       1, 0x00,0x21,                         //        delay 0x0021
-      41, 0x00,0x0C                          //          jmp 0x000C
-    };
-
-    memcpy(ledProgram.program, testProgram, sizeof(testProgram));
     ledProgram.pc = 0;
-
     ledProgram.strips[0].count = 15;
     ledProgram.strips[0].brightness = 64;
-
-    info("initialized strip[0] count[%d] pixels[%p] brightness[%d]\n",ledProgram.strips[0].count,ledProgram.strips[0].pixels,ledProgram.strips[0].brightness);
     ledProgram.state =  STATE_IDLE;
-    ledProgram.mode = MODE_RUN_WHEN_DISCONNECT;
+    ledProgram.mode  = MODE_OFF;
 }
 
 void setIdle(LEDProgram* program) {

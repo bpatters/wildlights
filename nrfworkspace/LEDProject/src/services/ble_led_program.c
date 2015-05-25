@@ -4,6 +4,7 @@
 #include <ble_types.h>
 #include <string.h>
 #include "services/ble_led_program.h"
+#include "LEDVM.h"
 
 static void on_connect(ble_led_program_t * p_led_program, ble_evt_t * p_ble_evt) {
 	p_led_program->conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
@@ -19,14 +20,28 @@ static void on_write(ble_led_program_t * p_led_program, ble_evt_t * p_ble_evt) {
 
 	if ( p_evt_write->handle == p_led_program->stream_handles.value_handle)
 	{
-		ble_led_program_packet_t *packet = (ble_led_program_packet_t *) p_evt_write->data;
-		uint16_t offset = (((uint16_t)packet->offsetHigh & 0xFF) <<8) + (packet->offsetLow & 0xFF);
-		if ( (offset >= 0) &&
-				(offset < sizeof(LEDStrip)) &&
-				((offset+p_evt_write->len -2) < (sizeof(LEDStrip)) )
-		){
-			memcpy(((uint8_t *)p_led_program->led_strip)+offset, packet->data, p_evt_write->len-2);
-		}
+		ble_led_instruction_packet_t *packet = (ble_led_instruction_packet_t *) p_evt_write->data;
+		// save previous values
+		uint8_t brightness = p_led_program->led_program->strips[0].brightness;
+		uint8_t count = p_led_program->led_program->strips[0].count;
+		uint16_t oldpc, pc = 0;
+
+		// run instruction(s)
+		p_led_program->led_program->strips[0].brightness = packet->brightness;
+		p_led_program->led_program->strips[0].count = packet->pixel_count;
+		p_led_program->led_program->strips[0].sync = false; // disable sync until done
+		int8_t icount = 0;
+		do {
+			//limit instruction count to 10 for safety
+			icount++;
+			oldpc = pc;
+			runSingleInstruction(p_led_program->led_program, &pc, packet->inst);
+			// execute until we hit an INST_END and pc doesn't but limit to a max of 10 executions
+		} while (oldpc != pc && icount < 10);
+
+		// restore values
+		p_led_program->led_program->strips[0].brightness = brightness;
+		p_led_program->led_program->strips[0].count = count;
 	} else if ( p_evt_write->handle == p_led_program->program_handles.value_handle) {
 		ble_led_program_packet_t *packet = (ble_led_program_packet_t *) p_evt_write->data;
 		uint16_t offset = (((uint16_t)packet->offsetHigh & 0xFF) <<8) + (packet->offsetLow & 0xFF);

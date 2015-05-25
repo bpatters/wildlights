@@ -11,16 +11,32 @@
 		2B1945781B07F4CC00C2DD92 /* wildlights.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B1945761B07F4CC00C2DD92 /* wildlights.xcdatamodeld */; };
 		2B19457A1B07F4CC00C2DD92 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1945791B07F4CC00C2DD92 /* ViewController.swift */; };
 		2B19457D1B07F4CC00C2DD92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B19457B1B07F4CC00C2DD92 /* Main.storyboard */; };
-		2B19457F1B07F4CC00C2DD92 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B19457E1B07F4CC00C2DD92 /* Images.xcassets */; };
 		2B1945821B07F4CC00C2DD92 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B1945801B07F4CC00C2DD92 /* LaunchScreen.xib */; };
 		2B19458E1B07F4CD00C2DD92 /* wildlightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19458D1B07F4CD00C2DD92 /* wildlightsTests.swift */; };
-		2B1945991B07F51900C2DD92 /* BTDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1945971B07F51900C2DD92 /* BTDiscovery.swift */; };
+		2B1945991B07F51900C2DD92 /* WLDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1945971B07F51900C2DD92 /* WLDeviceManager.swift */; };
 		2B19459A1B07F51900C2DD92 /* WildLightsHeadUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1945981B07F51900C2DD92 /* WildLightsHeadUnit.swift */; };
 		2B19459E1B0805DE00C2DD92 /* LedStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19459D1B0805DE00C2DD92 /* LedStrip.swift */; };
 		2B1945A01B0806E900C2DD92 /* LedProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19459F1B0806E900C2DD92 /* LedProgram.swift */; };
-		2B1945A21B092A7900C2DD92 /* WildLightsStreaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1945A11B092A7900C2DD92 /* WildLightsStreaming.swift */; };
+		2B4FB7A81B125FD300D07573 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B4FB7A71B125FD300D07573 /* SpriteKit.framework */; };
+		2B4FB7AE1B12997600D07573 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B4FB7AD1B12997600D07573 /* Images.xcassets */; };
+		2B4FB7B01B12AE5D00D07573 /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4FB7AF1B12AE5D00D07573 /* Statement.swift */; };
+		2B4FB7B21B12B0F800D07573 /* UpdateStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4FB7B11B12B0F800D07573 /* UpdateStatement.swift */; };
+		2B4FB7B71B12B61700D07573 /* instructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4FB7B61B12B61700D07573 /* instructions.swift */; };
+		2B4FB7BA1B12B9AE00D07573 /* PushColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4FB7B91B12B9AE00D07573 /* PushColor.swift */; };
+		2B4FB7BE1B12C2EA00D07573 /* StatementTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4FB7BD1B12C2EA00D07573 /* StatementTableViewController.swift */; };
 		2B94F6F51B0A192C00D6DDB3 /* DesktopCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B94F6F41B0A192C00D6DDB3 /* DesktopCollectionViewController.swift */; };
-		2B94F6F81B0A1DF000D6DDB3 /* DeviceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B94F6F71B0A1DF000D6DDB3 /* DeviceCollectionViewCell.swift */; };
+		2B94F6F81B0A1DF000D6DDB3 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B94F6F71B0A1DF000D6DDB3 /* ItemCollectionViewCell.swift */; };
+		2B94F70D1B0E9C2800D6DDB3 /* DeviceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B94F70C1B0E9C2800D6DDB3 /* DeviceTableViewController.swift */; };
+		2B94F7161B11020500D6DDB3 /* ProgramsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B94F7151B11020500D6DDB3 /* ProgramsViewController.swift */; };
+		2B94F7181B1102D700D6DDB3 /* ProgramCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B94F7171B1102D700D6DDB3 /* ProgramCollectionViewCell.swift */; };
+		2B94F71A1B1114DB00D6DDB3 /* NewProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B94F7191B1114DB00D6DDB3 /* NewProgramViewController.swift */; };
+		2BF5726F1B12D5E1006A342F /* DeviceSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5726E1B12D5E1006A342F /* DeviceSettingsViewController.swift */; };
+		2BF572731B12D7EE006A342F /* bridging.h in Sources */ = {isa = PBXBuildFile; fileRef = 2BF572721B12D7EE006A342F /* bridging.h */; };
+		2BF572751B137D2F006A342F /* LEDMiniProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF572741B137D2F006A342F /* LEDMiniProgram.swift */; };
+		2BF572771B138B4C006A342F /* EndProgramStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF572761B138B4C006A342F /* EndProgramStatement.swift */; };
+		2BF572791B13B102006A342F /* DeviceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF572781B13B102006A342F /* DeviceSettings.swift */; };
+		2BF5727B1B13CF71006A342F /* SwiftColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5727A1B13CF71006A342F /* SwiftColorPickerViewController.swift */; };
+		D355D3A77DAFFB1AE240876F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1FF2C3945C2E1EE70F1BD /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,18 +56,37 @@
 		2B1945771B07F4CC00C2DD92 /* wildlights.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = wildlights.xcdatamodel; sourceTree = "<group>"; };
 		2B1945791B07F4CC00C2DD92 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2B19457C1B07F4CC00C2DD92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		2B19457E1B07F4CC00C2DD92 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2B1945811B07F4CC00C2DD92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		2B1945871B07F4CC00C2DD92 /* wildlightsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wildlightsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B19458C1B07F4CC00C2DD92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B19458D1B07F4CD00C2DD92 /* wildlightsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wildlightsTests.swift; sourceTree = "<group>"; };
-		2B1945971B07F51900C2DD92 /* BTDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTDiscovery.swift; sourceTree = "<group>"; };
+		2B1945971B07F51900C2DD92 /* WLDeviceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WLDeviceManager.swift; sourceTree = "<group>"; };
 		2B1945981B07F51900C2DD92 /* WildLightsHeadUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WildLightsHeadUnit.swift; sourceTree = "<group>"; };
 		2B19459D1B0805DE00C2DD92 /* LedStrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LedStrip.swift; sourceTree = "<group>"; };
 		2B19459F1B0806E900C2DD92 /* LedProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LedProgram.swift; sourceTree = "<group>"; };
-		2B1945A11B092A7900C2DD92 /* WildLightsStreaming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WildLightsStreaming.swift; sourceTree = "<group>"; };
+		2B4FB7A71B125FD300D07573 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		2B4FB7AD1B12997600D07573 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = wildlights/Images.xcassets; sourceTree = "<group>"; };
+		2B4FB7AF1B12AE5D00D07573 /* Statement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
+		2B4FB7B11B12B0F800D07573 /* UpdateStatement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateStatement.swift; sourceTree = "<group>"; };
+		2B4FB7B61B12B61700D07573 /* instructions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = instructions.swift; sourceTree = "<group>"; };
+		2B4FB7B91B12B9AE00D07573 /* PushColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushColor.swift; sourceTree = "<group>"; };
+		2B4FB7BD1B12C2EA00D07573 /* StatementTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatementTableViewController.swift; sourceTree = "<group>"; };
 		2B94F6F41B0A192C00D6DDB3 /* DesktopCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesktopCollectionViewController.swift; sourceTree = "<group>"; };
-		2B94F6F71B0A1DF000D6DDB3 /* DeviceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceCollectionViewCell.swift; sourceTree = "<group>"; };
+		2B94F6F71B0A1DF000D6DDB3 /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		2B94F70C1B0E9C2800D6DDB3 /* DeviceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceTableViewController.swift; sourceTree = "<group>"; };
+		2B94F7151B11020500D6DDB3 /* ProgramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramsViewController.swift; sourceTree = "<group>"; };
+		2B94F7171B1102D700D6DDB3 /* ProgramCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramCollectionViewCell.swift; sourceTree = "<group>"; };
+		2B94F7191B1114DB00D6DDB3 /* NewProgramViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProgramViewController.swift; sourceTree = "<group>"; };
+		2BF5726E1B12D5E1006A342F /* DeviceSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceSettingsViewController.swift; sourceTree = "<group>"; };
+		2BF572701B12D72A006A342F /* libPods-NKOColorPickerView.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-NKOColorPickerView.a"; path = "Pods/../build/Debug-iphoneos/libPods-NKOColorPickerView.a"; sourceTree = "<group>"; };
+		2BF572721B12D7EE006A342F /* bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bridging.h; sourceTree = "<group>"; };
+		2BF572741B137D2F006A342F /* LEDMiniProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEDMiniProgram.swift; sourceTree = "<group>"; };
+		2BF572761B138B4C006A342F /* EndProgramStatement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndProgramStatement.swift; sourceTree = "<group>"; };
+		2BF572781B13B102006A342F /* DeviceSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceSettings.swift; sourceTree = "<group>"; };
+		2BF5727A1B13CF71006A342F /* SwiftColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftColorPickerViewController.swift; sourceTree = "<group>"; };
+		5634187AA0DCC8DBBD2B7469 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		9FD1FF2C3945C2E1EE70F1BD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF1225CC95B85584C723877A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +94,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B4FB7A81B125FD300D07573 /* SpriteKit.framework in Frameworks */,
+				D355D3A77DAFFB1AE240876F /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,9 +112,13 @@
 		2B1945661B07F4CC00C2DD92 = {
 			isa = PBXGroup;
 			children = (
+				2B4FB7AD1B12997600D07573 /* Images.xcassets */,
+				2B4FB7A71B125FD300D07573 /* SpriteKit.framework */,
 				2B1945711B07F4CC00C2DD92 /* wildlights */,
 				2B19458A1B07F4CC00C2DD92 /* wildlightsTests */,
 				2B1945701B07F4CC00C2DD92 /* Products */,
+				4DDA57E33BBF4A7DE2BA6768 /* Pods */,
+				6F6BF7E1FF1D7C2349A97D2D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,17 +134,20 @@
 		2B1945711B07F4CC00C2DD92 /* wildlights */ = {
 			isa = PBXGroup;
 			children = (
+				2B4FB7B31B12B2BF00D07573 /* LEDVM */,
+				2B94F7141B1101E500D6DDB3 /* ProgramsScene */,
 				2B94F6FB1B0AD74A00D6DDB3 /* ble */,
-				2B94F6F61B0A1DC600D6DDB3 /* DesktopView */,
+				2B94F70E1B0F647100D6DDB3 /* DeviceScene */,
 				2B19459D1B0805DE00C2DD92 /* LedStrip.swift */,
 				2B1945741B07F4CC00C2DD92 /* AppDelegate.swift */,
 				2B1945791B07F4CC00C2DD92 /* ViewController.swift */,
 				2B19457B1B07F4CC00C2DD92 /* Main.storyboard */,
-				2B19457E1B07F4CC00C2DD92 /* Images.xcassets */,
 				2B1945801B07F4CC00C2DD92 /* LaunchScreen.xib */,
 				2B1945761B07F4CC00C2DD92 /* wildlights.xcdatamodeld */,
 				2B1945721B07F4CC00C2DD92 /* Supporting Files */,
 				2B19459F1B0806E900C2DD92 /* LedProgram.swift */,
+				2BF572721B12D7EE006A342F /* bridging.h */,
+				2BF5727A1B13CF71006A342F /* SwiftColorPickerViewController.swift */,
 			);
 			path = wildlights;
 			sourceTree = "<group>";
@@ -133,23 +177,75 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2B94F6F61B0A1DC600D6DDB3 /* DesktopView */ = {
+		2B4FB7B31B12B2BF00D07573 /* LEDVM */ = {
 			isa = PBXGroup;
 			children = (
-				2B94F6F41B0A192C00D6DDB3 /* DesktopCollectionViewController.swift */,
-				2B94F6F71B0A1DF000D6DDB3 /* DeviceCollectionViewCell.swift */,
+				2B4FB7B61B12B61700D07573 /* instructions.swift */,
 			);
-			name = DesktopView;
+			name = LEDVM;
+			sourceTree = "<group>";
+		};
+		2B4FB7B81B12B99000D07573 /* instructions */ = {
+			isa = PBXGroup;
+			children = (
+				2B4FB7AF1B12AE5D00D07573 /* Statement.swift */,
+				2B4FB7B11B12B0F800D07573 /* UpdateStatement.swift */,
+				2BF572761B138B4C006A342F /* EndProgramStatement.swift */,
+				2B4FB7B91B12B9AE00D07573 /* PushColor.swift */,
+			);
+			name = instructions;
 			sourceTree = "<group>";
 		};
 		2B94F6FB1B0AD74A00D6DDB3 /* ble */ = {
 			isa = PBXGroup;
 			children = (
-				2B1945971B07F51900C2DD92 /* BTDiscovery.swift */,
-				2B1945A11B092A7900C2DD92 /* WildLightsStreaming.swift */,
+				2B1945971B07F51900C2DD92 /* WLDeviceManager.swift */,
 				2B1945981B07F51900C2DD92 /* WildLightsHeadUnit.swift */,
+				2BF572741B137D2F006A342F /* LEDMiniProgram.swift */,
+				2BF572781B13B102006A342F /* DeviceSettings.swift */,
 			);
 			name = ble;
+			sourceTree = "<group>";
+		};
+		2B94F70E1B0F647100D6DDB3 /* DeviceScene */ = {
+			isa = PBXGroup;
+			children = (
+				2B94F6F41B0A192C00D6DDB3 /* DesktopCollectionViewController.swift */,
+				2B94F6F71B0A1DF000D6DDB3 /* ItemCollectionViewCell.swift */,
+				2B94F70C1B0E9C2800D6DDB3 /* DeviceTableViewController.swift */,
+				2BF5726E1B12D5E1006A342F /* DeviceSettingsViewController.swift */,
+			);
+			name = DeviceScene;
+			sourceTree = "<group>";
+		};
+		2B94F7141B1101E500D6DDB3 /* ProgramsScene */ = {
+			isa = PBXGroup;
+			children = (
+				2B4FB7B81B12B99000D07573 /* instructions */,
+				2B94F7151B11020500D6DDB3 /* ProgramsViewController.swift */,
+				2B94F7171B1102D700D6DDB3 /* ProgramCollectionViewCell.swift */,
+				2B94F7191B1114DB00D6DDB3 /* NewProgramViewController.swift */,
+				2B4FB7BD1B12C2EA00D07573 /* StatementTableViewController.swift */,
+			);
+			name = ProgramsScene;
+			sourceTree = "<group>";
+		};
+		4DDA57E33BBF4A7DE2BA6768 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DF1225CC95B85584C723877A /* Pods.debug.xcconfig */,
+				5634187AA0DCC8DBBD2B7469 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6F6BF7E1FF1D7C2349A97D2D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2BF572701B12D72A006A342F /* libPods-NKOColorPickerView.a */,
+				9FD1FF2C3945C2E1EE70F1BD /* libPods.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,9 +255,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2B1945911B07F4CD00C2DD92 /* Build configuration list for PBXNativeTarget "wildlights" */;
 			buildPhases = (
+				E8046362B1BE37247654895E /* Check Pods Manifest.lock */,
 				2B19456B1B07F4CC00C2DD92 /* Sources */,
 				2B19456C1B07F4CC00C2DD92 /* Frameworks */,
 				2B19456D1B07F4CC00C2DD92 /* Resources */,
+				D2645029C80679085AEAE7E1 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -238,9 +336,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B4FB7AE1B12997600D07573 /* Images.xcassets in Resources */,
 				2B19457D1B07F4CC00C2DD92 /* Main.storyboard in Resources */,
 				2B1945821B07F4CC00C2DD92 /* LaunchScreen.xib in Resources */,
-				2B19457F1B07F4CC00C2DD92 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,20 +351,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D2645029C80679085AEAE7E1 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E8046362B1BE37247654895E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2B19456B1B07F4CC00C2DD92 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BF5727B1B13CF71006A342F /* SwiftColorPickerViewController.swift in Sources */,
+				2B4FB7B21B12B0F800D07573 /* UpdateStatement.swift in Sources */,
+				2BF5726F1B12D5E1006A342F /* DeviceSettingsViewController.swift in Sources */,
+				2B4FB7BA1B12B9AE00D07573 /* PushColor.swift in Sources */,
 				2B1945A01B0806E900C2DD92 /* LedProgram.swift in Sources */,
 				2B19457A1B07F4CC00C2DD92 /* ViewController.swift in Sources */,
+				2B94F7181B1102D700D6DDB3 /* ProgramCollectionViewCell.swift in Sources */,
+				2BF572731B12D7EE006A342F /* bridging.h in Sources */,
 				2B1945781B07F4CC00C2DD92 /* wildlights.xcdatamodeld in Sources */,
 				2B19459A1B07F51900C2DD92 /* WildLightsHeadUnit.swift in Sources */,
 				2B19459E1B0805DE00C2DD92 /* LedStrip.swift in Sources */,
-				2B1945A21B092A7900C2DD92 /* WildLightsStreaming.swift in Sources */,
+				2B4FB7BE1B12C2EA00D07573 /* StatementTableViewController.swift in Sources */,
+				2B94F71A1B1114DB00D6DDB3 /* NewProgramViewController.swift in Sources */,
+				2B94F7161B11020500D6DDB3 /* ProgramsViewController.swift in Sources */,
+				2B94F70D1B0E9C2800D6DDB3 /* DeviceTableViewController.swift in Sources */,
+				2B4FB7B01B12AE5D00D07573 /* Statement.swift in Sources */,
 				2B94F6F51B0A192C00D6DDB3 /* DesktopCollectionViewController.swift in Sources */,
-				2B1945991B07F51900C2DD92 /* BTDiscovery.swift in Sources */,
-				2B94F6F81B0A1DF000D6DDB3 /* DeviceCollectionViewCell.swift in Sources */,
+				2BF572751B137D2F006A342F /* LEDMiniProgram.swift in Sources */,
+				2BF572791B13B102006A342F /* DeviceSettings.swift in Sources */,
+				2B1945991B07F51900C2DD92 /* WLDeviceManager.swift in Sources */,
+				2B94F6F81B0A1DF000D6DDB3 /* ItemCollectionViewCell.swift in Sources */,
+				2B4FB7B71B12B61700D07573 /* instructions.swift in Sources */,
+				2BF572771B138B4C006A342F /* EndProgramStatement.swift in Sources */,
 				2B1945751B07F4CC00C2DD92 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,23 +539,35 @@
 		};
 		2B1945921B07F4CD00C2DD92 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF1225CC95B85584C723877A /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = wildlights/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = wildlights/bridging.h;
 			};
 			name = Debug;
 		};
 		2B1945931B07F4CD00C2DD92 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5634187AA0DCC8DBBD2B7469 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = wildlights/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = wildlights/bridging.h;
 			};
 			name = Release;
 		};

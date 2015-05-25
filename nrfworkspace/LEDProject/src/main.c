@@ -46,7 +46,7 @@
 #include "ble_flash.h"
 #include "ble_debug_assert_handler.h"
 
-#include "../include/services/ble_led_program.h"
+#include "services/ble_led_program.h"
 #include "LEDMain.h"
 #include "global.h"
 #include "light_ws2812_cortex.h"

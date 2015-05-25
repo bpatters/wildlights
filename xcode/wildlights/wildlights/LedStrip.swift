@@ -19,11 +19,11 @@ class LedStrip {
     }
     var pixels : [UInt8]  // GRB array of bytes
     
-    init() {
+    init(count: UInt8 = 10) {
         self.sync = 0
         self.brightness = 64
-        self.pixelCount = 10
-        self.pixels = [UInt8](count: Int(pixelCount*3), repeatedValue: 0)
+        self.pixelCount = count
+        self.pixels = Array<UInt8>(count: Int(pixelCount*3), repeatedValue: 0)
     }
     
     func setPixel(num: Int, red: Int, green: Int, blue: Int) {

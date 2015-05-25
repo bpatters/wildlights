@@ -6,47 +6,52 @@ import CoreBluetooth
 let WildLightsServiceUUIDString                = "D4DC7777-83CD-4027-A5F3-D9D172A33130"
 let WildLightsServiceUUID                      = CBUUID(string: WildLightsServiceUUIDString)
 
-let WildLightsStreamingSyncStateCharUUIDString = "D4DC7779-83CD-4027-A5F3-D9D172A33130"
+
 let WildLightsStreamingCharUUIDString          = "D4DC7778-83CD-4027-A5F3-D9D172A33130"
+let WildLightsStreamingSyncStateCharUUIDString = "D4DC7779-83CD-4027-A5F3-D9D172A33130"
+let WildLightsProgramCharUUIDString            = "D4DC7780-83CD-4027-A5F3-D9D172A33130"
 
 let WildLightsStreamingCharUUID                = CBUUID(string: WildLightsStreamingCharUUIDString)
 let WildLightsSyncStateCharUUID                = CBUUID(string: WildLightsStreamingSyncStateCharUUIDString)
-let WildLightsCharacteristicUUIDS              = [WildLightsStreamingCharUUID, WildLightsSyncStateCharUUID]
+let WildLightsProgramCharUUID                  = CBUUID(string: WildLightsProgramCharUUIDString)
+let WildLightsCharacteristicUUIDS              = [WildLightsStreamingCharUUID, WildLightsSyncStateCharUUID, WildLightsProgramCharUUID]
 
 
+var headUnitsSharedInstance : [String:WildLightsHeadUnit] = [:]
 
 class WildLightsHeadUnit : NSObject, CBPeripheralDelegate {
-    static let WildLightsHeadUnitConnected = "kWildLightsHeadUnitConnected"
-    static let WildLightsHeadUnitDisconnected = "kWildLightsHeadUnitDisconnected"
-    static let HeadUnitKey = "HeadUnit"
-    var peripheral: CBPeripheral?
-    var wildLightsStreaming : WildLightsStreaming?
-    var wildLightsService : CBService?
+    static let WildLightsHeadUnitConnected          = "kWildLightsHeadUnitConnected"
+    static let WildLightsHeadUnitDisconnected       = "kWildLightsHeadUnitDisconnected"
+    static let HeadUnitKey                          = "HeadUnit"
+    var peripheral          : CBPeripheral
+    var wlService           : CBService?
+    var wlStreamChar        : CBCharacteristic?
+    var wlSyncChar          : CBCharacteristic?
+    var wlDeviceSettings    : DeviceSettings
+
+    var streamReady         : Bool                  = true;
+    
+    var identifier          : String { get { return wlDeviceSettings.identifier } }
+    var name                : String { get { return wlDeviceSettings.name } set { wlDeviceSettings.name = newValue} }
+    var strip               : LedStrip { get { return wlDeviceSettings.program.strips[0] } }
+    var program             : LedProgram { get { return wlDeviceSettings.program } }
     
     init(initWithPeripheral peripheral: CBPeripheral) {
-        super.init()
-        self.wildLightsStreaming = nil
+        self.wlStreamChar = nil
+        self.wlSyncChar   = nil
         self.peripheral = peripheral
-        self.peripheral?.delegate = self
-        self.wildLightsService = nil
+        self.wlService = nil
+        self.wlDeviceSettings = DeviceSettings(name: peripheral.name, identifier: peripheral.identifier.UUIDString)
+        
+        super.init()
+        
+        self.peripheral.delegate = self
     }
-    
-    deinit {
-        self.reset()
-    }
+
     
     func startDiscoveringServices() {
-        self.peripheral?.discoverServices(nil)
+        self.peripheral.discoverServices(nil)
     }
-    
-    func reset() {
-        if peripheral != nil {
-            peripheral = nil
-        }
-        
-        self.sendHeadUnitDisconnectedNotification()
-    }
-    
     // Mark: - CBPeripheralDelegate
     
     func peripheral(peripheral: CBPeripheral!, didDiscoverServices error: NSError!) {
@@ -66,9 +71,9 @@ class WildLightsHeadUnit : NSObject, CBPeripheralDelegate {
         
         for service in peripheral.services {
             if service.UUID == WildLightsServiceUUID {
-                wildLightsService = service as? CBService;
+                self.wlService = service as? CBService;
                 peripheral.discoverCharacteristics(WildLightsCharacteristicUUIDS, forService: service as! CBService)
-                self.sendHeadUnitConnectedNotification()
+                headUnitsSharedInstance[self.identifier] = self
             }
         }
     }
@@ -85,17 +90,11 @@ class WildLightsHeadUnit : NSObject, CBPeripheralDelegate {
         for characteristic in service.characteristics {
             switch (characteristic.UUID) {
             case WildLightsSyncStateCharUUID:
-                if (wildLightsStreaming == nil) {
-                    wildLightsStreaming = WildLightsStreaming(peripheral: peripheral, service: service)
-                }
-                wildLightsStreaming!.syncChar = (characteristic as! CBCharacteristic)
-                peripheral.setNotifyValue(true, forCharacteristic: wildLightsStreaming?.syncChar)
+                self.wlSyncChar = characteristic as? CBCharacteristic
+                peripheral.setNotifyValue(true, forCharacteristic: wlSyncChar)
                 println ("Found characteristic \(characteristic)")
             case WildLightsStreamingCharUUID:
-                if (wildLightsStreaming == nil) {
-                    wildLightsStreaming = WildLightsStreaming(peripheral: peripheral, service: service)
-                }
-                wildLightsStreaming!.streamChar = (characteristic as! CBCharacteristic)
+                self.wlStreamChar = characteristic as? CBCharacteristic
                 println ("Found characteristic \(characteristic)")
             default:
                 break
@@ -103,18 +102,25 @@ class WildLightsHeadUnit : NSObject, CBPeripheralDelegate {
         }
     }
     
-    // Mark: - Private
-    
-    func sendHeadUnitConnectedNotification() {
-        NSNotificationCenter.defaultCenter().postNotificationName(WildLightsHeadUnit.WildLightsHeadUnitConnected, object: nil, userInfo: [WildLightsHeadUnit.HeadUnitKey:self])
-    }
-    func sendHeadUnitDisconnectedNotification() {
-        NSNotificationCenter.defaultCenter().postNotificationName(WildLightsHeadUnit.WildLightsHeadUnitDisconnected, object: nil, userInfo: [WildLightsHeadUnit.HeadUnitKey:self])
+    func peripheral(peripheral: CBPeripheral!, didWriteValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
+            if (characteristic == self.wlStreamChar) {
+                self.streamReady = true
+            }
     }
 }
 
-extension WildLightsHeadUnit : CBPeripheralDelegate {
-    func peripheral(peripheral: CBPeripheral!, didUpdateValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
-        NSNotificationCenter.defaultCenter().postNotificationName(characteristic.UUID.UUIDString, object:nil, userInfo: nil);
+extension WildLightsHeadUnit {
+
+    func sendMiniProgram(program: LEDMiniProgram) {
+        assert(streamReady, "Must wait for previous stream send to complete before issuing another")
+        
+        streamReady = false;
+        writeStreamData(program.getDataPacket())
     }
+    
+    private func writeStreamData(data: NSData) {
+        self.peripheral.writeValue(data, forCharacteristic: wlStreamChar!, type: .WithResponse)
+        println ("sending packet \(data) to device")
+    }
+    
 }

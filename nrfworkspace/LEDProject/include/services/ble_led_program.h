@@ -36,6 +36,15 @@ typedef struct _ble_led_program_init_t {
 } ble_led_program_init_t;
 
 
+/*
+ * Packet allowing you to run a single instruction
+ * against the specified strip length and brightness level.
+ */
+typedef struct _ble_led_instruction_packet_t {
+	uint8_t pixel_count;
+	uint8_t brightness;
+	uint8_t inst[18];
+} ble_led_instruction_packet_t;
 
 
 typedef struct _ble_led_program_packet_t {
