@@ -32,31 +32,27 @@ class DesktopCollectionViewController: UICollectionViewController {
         // handle reconnects
         NSNotificationCenter.defaultCenter().addObserverForName(WildLightsHeadUnit.WildLightsHeadUnitConnected, object:nil, queue: nil) { note in
             dispatch_async(dispatch_get_main_queue(),{
-                dispatch_async(dispatch_get_main_queue(),{
-                    var userInfo = note.userInfo as! Dictionary<String, WildLightsHeadUnit>
-                    var headUnit = userInfo[WLDeviceManager.DeviceKey]
-                    self.items.append(headUnit!)
-                    self.collectionView?.reloadData()
-                });
+                var userInfo = note.userInfo as! Dictionary<String, WildLightsHeadUnit>
+                var headUnit = userInfo[WLDeviceManager.DeviceKey]
+                self.items.append(headUnit!)
+                self.collectionView?.reloadData()
             });
         }
         // handle disconnections
         NSNotificationCenter.defaultCenter().addObserverForName(WildLightsHeadUnit.WildLightsHeadUnitDisconnected, object:nil, queue: nil) { note in
             dispatch_async(dispatch_get_main_queue(),{
-                dispatch_async(dispatch_get_main_queue(),{
-                    var userInfo = note.userInfo as! Dictionary<String, WildLightsHeadUnit>
-                    var headUnit = userInfo[WLDeviceManager.DeviceKey]
-                    for (index, item) in enumerate(self.items) {
-                        if (item is WildLightsHeadUnit) {
-                            var wl = item as! WildLightsHeadUnit
-                            if (wl.identifier == headUnit?.identifier) {
-                                self.items.removeAtIndex(index)
-                                break;
-                            }
+                var userInfo = note.userInfo as! Dictionary<String, WildLightsHeadUnit>
+                var headUnit = userInfo[WLDeviceManager.DeviceKey]
+                for (index, item) in enumerate(self.items) {
+                    if (item is WildLightsHeadUnit) {
+                        var wl = item as! WildLightsHeadUnit
+                        if (wl.identifier == headUnit?.identifier) {
+                            self.items.removeAtIndex(index)
+                            break;
                         }
                     }
-                    self.collectionView?.reloadData()
-                });
+                }
+                self.collectionView?.reloadData()
             });
         }
     }
@@ -101,7 +97,7 @@ extension DesktopCollectionViewController : UICollectionViewDataSource {
         } else if (item is LedProgram) {
             cell.nameLabel!.text = (item as? LedProgram)?.name
         }
-
+        
         return cell
         
     }

@@ -10,8 +10,16 @@
 
 
 typedef enum  {
-	INST_END		 = 0,        // END Program
-	INST_DELAY		 = 1,     // wait [short] milliseconds
+	INST_END		 	= 0x00,        // END Program
+	INST_DELAY		 	= 0x01,     // wait [short] milliseconds
+	INST_UPDATE 	 	= 0x02, // imm8   -- Sends pixel updates to the specified strip number
+	INST_PUSHC_I		= 0x03, // push stripNum, count, red,green,blue
+	INST_PULLC_I		= 0x04, // pull stripNum, count, red, green, blue
+	INST_PUSHC_LERP_I   = 0x05, // push lerp stripNum, count, startRed, startGreen, startBlue, endRed, endGreen, endBlue
+	INST_PULLC_LERP_I 	= 0x06, // pull lerp stripNum, count, startRed, startGreen, startBlue, endRed, endGreen, endBlue
+} INSTRUCTIONS;
+
+/*
 	INST_PUSH		 = 2,      // PUSH reg onto stack
 	INST_PUSHN		 = 3, // PUSHN r[n1],r[n2]   - push r[n1] -->r[n2] onto the stack ie pushn r0,r12
 	INST_POP		 = 4,       // POP reg from stack
@@ -63,14 +71,6 @@ typedef enum  {
 	INST_JNE		 = 49,       // Jump addr - jump to address if FLAG != FLAG_EQ
 	INST_JLT		 = 50,       // Jump addr - jump to address if FLAG = FLAG_LT
 	INST_JGT		 = 51,       // Jump addr - jump to address if FLAG = FLAG_0
+*/
 
-// LED manipulation functions
-	INST_PUSHCR		 = 52, // imm8,reg - push (reg = xrgb) pixels out of head unit into led#
-	INST_PULLCR		 = 53, // imm8,reg - pull a pixel into head unit and shift in from end of strip (reg = xrgb)
-	INST_ROTATEO	 = 54, // imm8     - ledStrip# rotate 1 leds away from head unit and those colors shifted out come back in
-	INST_ROTATEI	 = 55, // imm8     - ledStrip# rotate 1 leds into head unit and those colors shifted in goto end of strip
-	INST_SETPIXEL	 = 56, //  imm8,reg1,reg2 - For LED strip imm8 SET LED=reg1 to to xrgb color = reg2
-	INST_READPIXEL	 = 57, // imm8,dreg,src - For LED strip imm8 READ LED=sreg into dreg
-	INST_UPDATE 	 = 58  // imm8   -- Sends pixel updates to the specified strip number
-} INSTRUCTIONS;
 #endif /* INCLUDE_INSTRUCTIONS_H_ */

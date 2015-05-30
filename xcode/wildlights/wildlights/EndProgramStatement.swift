@@ -15,10 +15,6 @@ class EndProgramStatement : Statement {
         
     }
     
-    required init(byteCode: [UInt8]) {
-        
-    }
-    
     func toByteCode() -> [UInt8] {
         return [UInt8(Instructions.INST_END)]
     }

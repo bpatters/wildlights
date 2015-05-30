@@ -11,11 +11,8 @@ import Foundation
 class UpdateStatement : Statement {
     var name      : String             = "Update"
     var stripNum  : UInt8              = 0;
-    required init() {
-        
-    }
     
-    required init(byteCode: [UInt8]) {
+    required init() {
         
     }
     

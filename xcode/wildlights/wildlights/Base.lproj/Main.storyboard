@@ -80,12 +80,12 @@
         <scene sceneID="Abo-Lo-mgk">
             <objects>
                 <tableViewController id="dh9-aQ-nyA" customClass="DeviceSettingsViewController" customModule="wildlights" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="4Kw-9P-Gip">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="4Kw-9P-Gip">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Section-1" id="ccy-Pq-aiz">
+                            <tableViewSection headerTitle="Settings" id="ccy-Pq-aiz">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="Y9k-Ol-oBk">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -182,7 +182,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Section-2" id="Waj-Oz-ZwC">
+                            <tableViewSection headerTitle="Recent Colors" id="Waj-Oz-ZwC">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="68" id="GMA-vu-s2q">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -233,23 +233,33 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="YDN-w7-vxb" firstAttribute="top" secondItem="Nci-xm-PkC" secondAttribute="topMargin" id="1tQ-Um-1aq"/>
+                                                <constraint firstItem="YDN-w7-vxb" firstAttribute="top" secondItem="Nci-xm-PkC" secondAttribute="topMargin" priority="500" id="1tQ-Um-1aq"/>
                                                 <constraint firstItem="pKO-Mm-T8f" firstAttribute="trailing" secondItem="Nci-xm-PkC" secondAttribute="trailingMargin" id="KgO-zk-sNa"/>
-                                                <constraint firstItem="tdx-d9-p8L" firstAttribute="top" secondItem="qP4-ZW-s61" secondAttribute="top" id="P8P-GW-dgL"/>
-                                                <constraint firstItem="Cs9-K6-EWv" firstAttribute="centerY" secondItem="YDN-w7-vxb" secondAttribute="centerY" id="QsI-Um-Kth"/>
+                                                <constraint firstItem="Cs9-K6-EWv" firstAttribute="centerY" secondItem="YDN-w7-vxb" secondAttribute="centerY" priority="500" id="QsI-Um-Kth"/>
                                                 <constraint firstItem="kAz-3V-rTu" firstAttribute="leading" secondItem="Nci-xm-PkC" secondAttribute="leadingMargin" constant="10" id="S9i-cA-CTR"/>
-                                                <constraint firstItem="Cs9-K6-EWv" firstAttribute="top" secondItem="YDN-w7-vxb" secondAttribute="top" id="SIC-lX-RI6"/>
                                                 <constraint firstAttribute="centerY" secondItem="kAz-3V-rTu" secondAttribute="centerY" constant="-3" id="UHh-7R-hdg"/>
                                                 <constraint firstItem="YDN-w7-vxb" firstAttribute="centerY" secondItem="tdx-d9-p8L" secondAttribute="centerY" id="VTv-zv-fzr"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="tdx-d9-p8L" secondAttribute="bottom" constant="3" id="X5N-WT-8Os"/>
-                                                <constraint firstItem="Cs9-K6-EWv" firstAttribute="leading" secondItem="YDN-w7-vxb" secondAttribute="trailing" constant="48" id="Yrg-kf-LyT"/>
-                                                <constraint firstItem="YDN-w7-vxb" firstAttribute="leading" secondItem="tdx-d9-p8L" secondAttribute="trailing" constant="48" id="af5-Je-snh"/>
-                                                <constraint firstItem="Cs9-K6-EWv" firstAttribute="top" secondItem="pKO-Mm-T8f" secondAttribute="top" id="avc-6X-WHo"/>
-                                                <constraint firstItem="qP4-ZW-s61" firstAttribute="leading" secondItem="kAz-3V-rTu" secondAttribute="trailing" constant="25" id="bxX-Wh-VbG"/>
-                                                <constraint firstItem="pKO-Mm-T8f" firstAttribute="leading" secondItem="Cs9-K6-EWv" secondAttribute="trailing" constant="48" id="gaF-jZ-yIq"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="tdx-d9-p8L" secondAttribute="bottom" priority="500" constant="3" id="X5N-WT-8Os"/>
+                                                <constraint firstItem="Cs9-K6-EWv" firstAttribute="leading" secondItem="YDN-w7-vxb" secondAttribute="trailing" constant="48" id="Yrg-kf-LyT">
+                                                    <variation key="widthClass=compact" constant="10"/>
+                                                </constraint>
+                                                <constraint firstItem="qP4-ZW-s61" firstAttribute="top" secondItem="Cs9-K6-EWv" secondAttribute="top" id="Zgm-yw-7Md"/>
+                                                <constraint firstItem="YDN-w7-vxb" firstAttribute="leading" secondItem="tdx-d9-p8L" secondAttribute="trailing" constant="48" id="af5-Je-snh">
+                                                    <variation key="widthClass=compact" constant="10"/>
+                                                </constraint>
+                                                <constraint firstItem="qP4-ZW-s61" firstAttribute="leading" secondItem="kAz-3V-rTu" secondAttribute="trailing" constant="25" id="bxX-Wh-VbG">
+                                                    <variation key="widthClass=compact" constant="5"/>
+                                                </constraint>
+                                                <constraint firstItem="qP4-ZW-s61" firstAttribute="top" secondItem="tdx-d9-p8L" secondAttribute="top" id="d8h-Y7-593"/>
+                                                <constraint firstItem="pKO-Mm-T8f" firstAttribute="leading" secondItem="Cs9-K6-EWv" secondAttribute="trailing" constant="48" id="gaF-jZ-yIq">
+                                                    <variation key="widthClass=compact" constant="10"/>
+                                                </constraint>
                                                 <constraint firstItem="qP4-ZW-s61" firstAttribute="centerY" secondItem="tdx-d9-p8L" secondAttribute="centerY" id="grN-mu-YRF"/>
-                                                <constraint firstItem="tdx-d9-p8L" firstAttribute="top" secondItem="YDN-w7-vxb" secondAttribute="top" id="tlg-Ul-f8t"/>
-                                                <constraint firstItem="tdx-d9-p8L" firstAttribute="leading" secondItem="qP4-ZW-s61" secondAttribute="trailing" constant="48" id="xUM-df-gAK"/>
+                                                <constraint firstItem="qP4-ZW-s61" firstAttribute="top" secondItem="YDN-w7-vxb" secondAttribute="top" id="h9x-sM-c4N"/>
+                                                <constraint firstItem="qP4-ZW-s61" firstAttribute="top" secondItem="pKO-Mm-T8f" secondAttribute="top" id="saj-eD-iC2"/>
+                                                <constraint firstItem="tdx-d9-p8L" firstAttribute="leading" secondItem="qP4-ZW-s61" secondAttribute="trailing" constant="48" id="xUM-df-gAK">
+                                                    <variation key="widthClass=compact" constant="10"/>
+                                                </constraint>
                                                 <constraint firstItem="pKO-Mm-T8f" firstAttribute="centerY" secondItem="Cs9-K6-EWv" secondAttribute="centerY" id="zCB-nl-ONG"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -257,18 +267,24 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Section-3" id="vXk-DM-yhU">
+                            <tableViewSection headerTitle="Color Selection" id="vXk-DM-yhU">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="250" id="aXx-os-icM">
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalCompressionResistancePriority="1000" tableViewCell="aXx-os-icM" id="J90-Zw-mgO">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aXx-os-icM" id="J90-Zw-mgO">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AGs-85-wU9" customClass="NKOColorPickerView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="250"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGs-85-wU9" customClass="NKOColorPickerView">
+                                                    <rect key="frame" x="8" y="8" width="584" height="183"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="AGs-85-wU9" firstAttribute="top" secondItem="J90-Zw-mgO" secondAttribute="topMargin" id="0AQ-y1-PAD"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="AGs-85-wU9" secondAttribute="trailing" id="MXE-KZ-AFT"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="AGs-85-wU9" secondAttribute="bottom" constant="50" id="iNv-4a-8RK"/>
+                                                <constraint firstItem="AGs-85-wU9" firstAttribute="leading" secondItem="J90-Zw-mgO" secondAttribute="leadingMargin" id="oAe-8P-6bJ"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>

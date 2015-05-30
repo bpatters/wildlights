@@ -11,9 +11,5 @@ import Foundation
 protocol Statement {
     var name        : String { get }
     
-    init()
-    
-    init(byteCode: [UInt8])
-    
     func toByteCode() -> [UInt8]
 }

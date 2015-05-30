@@ -34,8 +34,6 @@
 		25566EC178D09419714FD052 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		271794754E6C33C4A8421562 /* Pods-NKOColorPickerView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NKOColorPickerView.xcconfig"; sourceTree = "<group>"; };
 		34B95FD26127870310180164 /* libPods-NKOColorPickerView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NKOColorPickerView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		50AEEFAF5F7C2390F025ECBB /* nko_brightness_guide.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = nko_brightness_guide.png; path = Assets/nko_brightness_guide.png; sourceTree = "<group>"; };
-		52F153142CF97E19F1E37CAB /* nko_brightness_guide@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "nko_brightness_guide@2x.png"; path = "Assets/nko_brightness_guide@2x.png"; sourceTree = "<group>"; };
 		5AEBC6AD8A590E32BEFEE74C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		66A35D81A844E50D020CC79A /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
 		787A2A3BF576EAC2514CC06E /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -173,8 +171,6 @@
 		EBFC3F4172C5776D09CFB2F0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				50AEEFAF5F7C2390F025ECBB /* nko_brightness_guide.png */,
-				52F153142CF97E19F1E37CAB /* nko_brightness_guide@2x.png */,
 				941497AC53BEA2D5391177ED /* nko_colormap.png */,
 			);
 			name = Resources;

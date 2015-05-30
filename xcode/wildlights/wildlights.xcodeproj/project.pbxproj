@@ -22,7 +22,7 @@
 		2B4FB7B01B12AE5D00D07573 /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4FB7AF1B12AE5D00D07573 /* Statement.swift */; };
 		2B4FB7B21B12B0F800D07573 /* UpdateStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4FB7B11B12B0F800D07573 /* UpdateStatement.swift */; };
 		2B4FB7B71B12B61700D07573 /* instructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4FB7B61B12B61700D07573 /* instructions.swift */; };
-		2B4FB7BA1B12B9AE00D07573 /* PushColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4FB7B91B12B9AE00D07573 /* PushColor.swift */; };
+		2B4FB7BA1B12B9AE00D07573 /* PushColorStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4FB7B91B12B9AE00D07573 /* PushColorStatement.swift */; };
 		2B4FB7BE1B12C2EA00D07573 /* StatementTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4FB7BD1B12C2EA00D07573 /* StatementTableViewController.swift */; };
 		2B94F6F51B0A192C00D6DDB3 /* DesktopCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B94F6F41B0A192C00D6DDB3 /* DesktopCollectionViewController.swift */; };
 		2B94F6F81B0A1DF000D6DDB3 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B94F6F71B0A1DF000D6DDB3 /* ItemCollectionViewCell.swift */; };
@@ -36,6 +36,7 @@
 		2BF572771B138B4C006A342F /* EndProgramStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF572761B138B4C006A342F /* EndProgramStatement.swift */; };
 		2BF572791B13B102006A342F /* DeviceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF572781B13B102006A342F /* DeviceSettings.swift */; };
 		2BF5727B1B13CF71006A342F /* SwiftColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5727A1B13CF71006A342F /* SwiftColorPickerViewController.swift */; };
+		2BF5727D1B17FD75006A342F /* PushFadeStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5727C1B17FD75006A342F /* PushFadeStatement.swift */; };
 		D355D3A77DAFFB1AE240876F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1FF2C3945C2E1EE70F1BD /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -69,7 +70,7 @@
 		2B4FB7AF1B12AE5D00D07573 /* Statement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
 		2B4FB7B11B12B0F800D07573 /* UpdateStatement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateStatement.swift; sourceTree = "<group>"; };
 		2B4FB7B61B12B61700D07573 /* instructions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = instructions.swift; sourceTree = "<group>"; };
-		2B4FB7B91B12B9AE00D07573 /* PushColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushColor.swift; sourceTree = "<group>"; };
+		2B4FB7B91B12B9AE00D07573 /* PushColorStatement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushColorStatement.swift; sourceTree = "<group>"; };
 		2B4FB7BD1B12C2EA00D07573 /* StatementTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatementTableViewController.swift; sourceTree = "<group>"; };
 		2B94F6F41B0A192C00D6DDB3 /* DesktopCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesktopCollectionViewController.swift; sourceTree = "<group>"; };
 		2B94F6F71B0A1DF000D6DDB3 /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -84,6 +85,7 @@
 		2BF572761B138B4C006A342F /* EndProgramStatement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndProgramStatement.swift; sourceTree = "<group>"; };
 		2BF572781B13B102006A342F /* DeviceSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceSettings.swift; sourceTree = "<group>"; };
 		2BF5727A1B13CF71006A342F /* SwiftColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftColorPickerViewController.swift; sourceTree = "<group>"; };
+		2BF5727C1B17FD75006A342F /* PushFadeStatement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushFadeStatement.swift; sourceTree = "<group>"; };
 		5634187AA0DCC8DBBD2B7469 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9FD1FF2C3945C2E1EE70F1BD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF1225CC95B85584C723877A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -191,7 +193,8 @@
 				2B4FB7AF1B12AE5D00D07573 /* Statement.swift */,
 				2B4FB7B11B12B0F800D07573 /* UpdateStatement.swift */,
 				2BF572761B138B4C006A342F /* EndProgramStatement.swift */,
-				2B4FB7B91B12B9AE00D07573 /* PushColor.swift */,
+				2B4FB7B91B12B9AE00D07573 /* PushColorStatement.swift */,
+				2BF5727C1B17FD75006A342F /* PushFadeStatement.swift */,
 			);
 			name = instructions;
 			sourceTree = "<group>";
@@ -392,13 +395,14 @@
 				2BF5727B1B13CF71006A342F /* SwiftColorPickerViewController.swift in Sources */,
 				2B4FB7B21B12B0F800D07573 /* UpdateStatement.swift in Sources */,
 				2BF5726F1B12D5E1006A342F /* DeviceSettingsViewController.swift in Sources */,
-				2B4FB7BA1B12B9AE00D07573 /* PushColor.swift in Sources */,
+				2B4FB7BA1B12B9AE00D07573 /* PushColorStatement.swift in Sources */,
 				2B1945A01B0806E900C2DD92 /* LedProgram.swift in Sources */,
 				2B19457A1B07F4CC00C2DD92 /* ViewController.swift in Sources */,
 				2B94F7181B1102D700D6DDB3 /* ProgramCollectionViewCell.swift in Sources */,
 				2BF572731B12D7EE006A342F /* bridging.h in Sources */,
 				2B1945781B07F4CC00C2DD92 /* wildlights.xcdatamodeld in Sources */,
 				2B19459A1B07F51900C2DD92 /* WildLightsHeadUnit.swift in Sources */,
+				2BF5727D1B17FD75006A342F /* PushFadeStatement.swift in Sources */,
 				2B19459E1B0805DE00C2DD92 /* LedStrip.swift in Sources */,
 				2B4FB7BE1B12C2EA00D07573 /* StatementTableViewController.swift in Sources */,
 				2B94F71A1B1114DB00D6DDB3 /* NewProgramViewController.swift in Sources */,

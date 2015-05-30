@@ -11,7 +11,7 @@ typealias didSelectResponder = (statement: Statement) -> Void
 
 class StatementTableViewController: UITableViewController {
     let statementCell = "statementCell"
-    var statements : [Statement] = [PushColor(), UpdateStatement()]
+    var statements : [Statement] = []
     var didSelect : didSelectResponder?
     
     override func viewDidLoad() {

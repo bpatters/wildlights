@@ -50,13 +50,29 @@ class DeviceSettingsViewController: UITableViewController, UIGestureRecognizerDe
                 println ("Skipping send since previous send has not completed")
             }
         }
+        
+        // handle device disconnected error
+        NSNotificationCenter.defaultCenter().addObserverForName(WildLightsHeadUnit.WildLightsHeadUnitDisconnected, object:nil, queue: nil) { note in
+            dispatch_async(dispatch_get_main_queue(),{
+                var userInfo = note.userInfo as! Dictionary<String, WildLightsHeadUnit>
+                var headUnit = userInfo[WLDeviceManager.DeviceKey]
+                if (headUnit?.identifier == self.device?.identifier) {
+                    self.navigationController?.popToRootViewControllerAnimated(true)
+                    // display error message
+                    dispatch_async(dispatch_get_main_queue(),{
+                        var alert = UIAlertView(title: nil, message: "Connection Lost!", delegate: nil, cancelButtonTitle: "Done")
+                        alert.show()
+                    })
+                }
+            });
+        }
     }
     
     private func sendColor(color: UIColor ) {
         var colors = CGColorGetComponents(color.CGColor)
         var program = LEDMiniProgram(count:self.device!.strip.pixelCount, brightness: UInt8(255),
             statements: [
-                PushColor(stripNum:UInt8(0), count: self.device!.strip.pixelCount, red: UInt8(colors[0] * CGFloat(self.device!.strip.brightness)), green: UInt8(colors[1] * CGFloat(self.device!.strip.brightness)), blue: UInt8(colors[2] * CGFloat(self.device!.strip.brightness))),
+                PushColorStatement(stripNum:UInt8(0), count: self.device!.strip.pixelCount, red: UInt8(colors[0] * CGFloat(self.device!.strip.brightness)), green: UInt8(colors[1] * CGFloat(self.device!.strip.brightness)), blue: UInt8(colors[2] * CGFloat(self.device!.strip.brightness))),
                 UpdateStatement(),
                 EndProgramStatement()
             ]

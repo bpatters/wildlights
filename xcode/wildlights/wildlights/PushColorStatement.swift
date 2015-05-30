@@ -9,17 +9,13 @@
 import Foundation
 import UIKit
 
-class PushColor : Statement {
+class PushColorStatement : Statement {
     var name      : String  = "Push Color"
     var stripNum  : UInt8   = 0
     var count     : UInt8   = 0
     var red       : UInt8   = 0
     var green     : UInt8   = 0
     var blue      : UInt8   = 0
-    
-    required init() {
-        
-    }
     
     init (stripNum: UInt8, count: UInt8, red: UInt8, green: UInt8, blue: UInt8) {
         self.stripNum = stripNum
@@ -29,15 +25,8 @@ class PushColor : Statement {
         self.blue  = blue
     }
     
-    required init(byteCode: [UInt8]) {
-        count = byteCode[0]
-        green = byteCode[1]
-        red   = byteCode[2]
-        blue  = byteCode[3]
-    }
-    
     func toByteCode() -> [UInt8] {
-       return [UInt8(Instructions.INST_PUSHCR), stripNum, count, red, green, blue]
+       return [UInt8(Instructions.INST_PUSHC_I), stripNum, count, red, green, blue]
     }
     
 }
