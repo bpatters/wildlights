@@ -539,8 +539,8 @@ http://www.ti.com/lit/ds/symlink/txs0101.pdf</description>
 <devices>
 <device name="" package="PTS840GK">
 <connects>
-<connect gate="G$1" pin="P$1" pad="P$1 P$2"/>
-<connect gate="G$1" pin="P$2" pad="P$3 P$4"/>
+<connect gate="G$1" pin="P$1" pad="P$1"/>
+<connect gate="G$1" pin="P$2" pad="P$3"/>
 </connects>
 <technologies>
 <technology name=""/>

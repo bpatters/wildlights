@@ -204,12 +204,12 @@
 <package name="70AAJ-3">
 <description>70AA Series 3 pin connector.
 http://www.digikey.com/product-detail/en/70AAJ-3-F0/70AAJ-3-F0-ND/1232555</description>
-<smd name="GND_IN" x="-0.825" y="1.995" dx="3.81" dy="1.65" layer="1" rot="R90"/>
-<smd name="D_IN" x="-3.365" y="1.995" dx="3.81" dy="1.65" layer="1" rot="R90"/>
-<smd name="P_IN" x="-5.905" y="1.995" dx="3.81" dy="1.65" layer="1" rot="R90"/>
-<smd name="GND_OUT" x="-0.825" y="8.005" dx="3.81" dy="1.65" layer="1" rot="R90"/>
-<smd name="D_OUT" x="-3.365" y="8.005" dx="3.81" dy="1.65" layer="1" rot="R90"/>
-<smd name="P_OUT" x="-5.905" y="8.005" dx="3.81" dy="1.65" layer="1" rot="R90"/>
+<smd name="GND_IN" x="-0.825" y="1.995" dx="3.048" dy="1.65" layer="1" rot="R90"/>
+<smd name="D_IN" x="-3.365" y="1.995" dx="3.048" dy="1.65" layer="1" rot="R90"/>
+<smd name="P_IN" x="-5.905" y="1.995" dx="3.048" dy="1.65" layer="1" rot="R90"/>
+<smd name="GND_OUT" x="-0.825" y="8.005" dx="3.048" dy="1.65" layer="1" rot="R90"/>
+<smd name="D_OUT" x="-3.365" y="8.005" dx="3.048" dy="1.65" layer="1" rot="R90"/>
+<smd name="P_OUT" x="-5.905" y="8.005" dx="3.048" dy="1.65" layer="1" rot="R90"/>
 <wire x1="-7" y1="10" x2="0" y2="10" width="0.127" layer="51"/>
 <wire x1="0" y1="10" x2="0" y2="0" width="0.127" layer="51"/>
 <wire x1="0" y1="0" x2="-7" y2="0" width="0.127" layer="51"/>
@@ -539,8 +539,8 @@ http://www.ti.com/lit/ds/symlink/txs0101.pdf</description>
 <devices>
 <device name="" package="PTS840GK">
 <connects>
-<connect gate="G$1" pin="P$1" pad="P$1"/>
-<connect gate="G$1" pin="P$2" pad="P$3"/>
+<connect gate="G$1" pin="P$1" pad="P$1 P$2"/>
+<connect gate="G$1" pin="P$2" pad="P$3 P$4"/>
 </connects>
 <technologies>
 <technology name=""/>

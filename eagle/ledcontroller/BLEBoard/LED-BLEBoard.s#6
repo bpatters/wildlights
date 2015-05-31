@@ -1685,9 +1685,9 @@ Standard 1-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <part name="U$2" library="bret" deviceset="TXS0101" device="TXS0101DBVR" value="TXS0101TXS0101DBVR"/>
 <part name="U$1" library="bret" deviceset="MM800" device=""/>
 <part name="U$3" library="bret" deviceset="PTS840" device=""/>
-<part name="JP2" library="SparkFun-Connectors" deviceset="M01" device="SMD-4.5X1.5"/>
 <part name="JP3" library="SparkFun-Connectors" deviceset="M01" device="SMD-4.5X1.5"/>
 <part name="JP4" library="SparkFun-Connectors" deviceset="M01" device="SMD-4.5X1.5"/>
+<part name="JP2" library="SparkFun-Connectors" deviceset="M01" device="SMD-4.5X1.5"/>
 </parts>
 <sheets>
 <sheet>
@@ -1709,9 +1709,9 @@ Standard 1-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <instance part="U$2" gate="G$1" x="15.24" y="139.7" rot="R90"/>
 <instance part="U$1" gate="G$1" x="-33.02" y="142.24" rot="R90"/>
 <instance part="U$3" gate="G$1" x="-25.4" y="96.52"/>
-<instance part="JP2" gate="G$1" x="-48.342240625" y="91.321296875"/>
 <instance part="JP3" gate="G$1" x="-48.26" y="78.74"/>
 <instance part="JP4" gate="G$1" x="-48.26" y="66.04"/>
+<instance part="JP2" gate="G$1" x="-48.768" y="91.186"/>
 </instances>
 <busses>
 </busses>
@@ -1981,12 +1981,15 @@ Standard 1-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </net>
 <net name="GPIO4" class="0">
 <segment>
-<wire x1="-40.64" y1="91.44" x2="-35.56" y2="91.44" width="0.1524" layer="91"/>
-<label x="-38.1" y="93.98" size="1.778" layer="95"/>
-</segment>
-<segment>
 <pinref part="U2" gate="G$1" pin="GPIO4"/>
 <wire x1="30.48" y1="142.24" x2="27.94" y2="142.24" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="-48.26" y1="91.44" x2="-41.148" y2="91.186" width="0.1524" layer="91"/>
+<pinref part="JP2" gate="G$1" pin="1"/>
+<wire x1="-41.148" y1="91.186" x2="-34.544" y2="91.186" width="0.1524" layer="91"/>
+<junction x="-41.148" y="91.186"/>
+<label x="-38.1" y="93.98" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
