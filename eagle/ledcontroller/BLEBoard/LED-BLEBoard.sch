@@ -204,12 +204,12 @@
 <package name="70AAJ-3">
 <description>70AA Series 3 pin connector.
 http://www.digikey.com/product-detail/en/70AAJ-3-F0/70AAJ-3-F0-ND/1232555</description>
-<smd name="GND_IN" x="-0.825" y="1.995" dx="3.048" dy="1.65" layer="1" rot="R90"/>
-<smd name="D_IN" x="-3.365" y="1.995" dx="3.048" dy="1.65" layer="1" rot="R90"/>
-<smd name="P_IN" x="-5.905" y="1.995" dx="3.048" dy="1.65" layer="1" rot="R90"/>
-<smd name="GND_OUT" x="-0.825" y="8.005" dx="3.048" dy="1.65" layer="1" rot="R90"/>
-<smd name="D_OUT" x="-3.365" y="8.005" dx="3.048" dy="1.65" layer="1" rot="R90"/>
-<smd name="P_OUT" x="-5.905" y="8.005" dx="3.048" dy="1.65" layer="1" rot="R90"/>
+<smd name="P$3@1" x="-0.825" y="1.995" dx="3.048" dy="1.65" layer="1" rot="R90"/>
+<smd name="P$2@1" x="-3.365" y="1.995" dx="3.048" dy="1.65" layer="1" rot="R90"/>
+<smd name="P$1@1" x="-5.905" y="1.995" dx="3.048" dy="1.65" layer="1" rot="R90"/>
+<smd name="P$3@3" x="-0.825" y="8.005" dx="3.048" dy="1.65" layer="1" rot="R90"/>
+<smd name="P$2@2" x="-3.365" y="8.005" dx="3.048" dy="1.65" layer="1" rot="R90"/>
+<smd name="P$1@2" x="-5.905" y="8.005" dx="3.048" dy="1.65" layer="1" rot="R90"/>
 <wire x1="-7" y1="10" x2="0" y2="10" width="0.127" layer="51"/>
 <wire x1="0" y1="10" x2="0" y2="0" width="0.127" layer="51"/>
 <wire x1="0" y1="0" x2="-7" y2="0" width="0.127" layer="51"/>
@@ -329,18 +329,20 @@ http://www.ti.com/product/TPS61232/datasheet/applications_and_implementation#SLV
 <text x="-27.94" y="-20.32" size="1.778" layer="96">&gt;VALUE</text>
 </symbol>
 <symbol name="70AAF-3">
-<wire x1="0" y1="-10.16" x2="0" y2="20.32" width="0.254" layer="94"/>
-<wire x1="0" y1="20.32" x2="-12.7" y2="20.32" width="0.254" layer="94"/>
-<wire x1="-12.7" y1="20.32" x2="-12.7" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="0" y1="-10.16" x2="0" y2="2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="2.54" x2="-12.7" y2="2.54" width="0.254" layer="94"/>
+<wire x1="-12.7" y1="2.54" x2="-12.7" y2="-10.16" width="0.254" layer="94"/>
 <wire x1="-12.7" y1="-10.16" x2="0" y2="-10.16" width="0.254" layer="94"/>
-<pin name="IN1" x="-11.43" y="-13.97" visible="pin" length="middle" rot="R90"/>
-<pin name="IN2" x="-6.35" y="-13.97" visible="pin" length="middle" rot="R90"/>
-<pin name="IN3" x="-1.27" y="-13.97" visible="pin" length="middle" rot="R90"/>
-<pin name="OUT3" x="-1.27" y="24.13" visible="pin" length="middle" rot="R270"/>
-<pin name="OUT2" x="-6.35" y="24.13" visible="pin" length="middle" rot="R270"/>
-<pin name="OUT1" x="-11.43" y="24.13" visible="pin" length="middle" rot="R270"/>
+<pin name="P$1" x="-11.43" y="-13.97" visible="pin" length="middle" rot="R90"/>
+<pin name="P$2" x="-6.35" y="-13.97" visible="pin" length="middle" rot="R90"/>
+<pin name="P$3" x="-1.27" y="-13.97" visible="pin" length="middle" rot="R90"/>
 <text x="-15.24" y="-7.62" size="1.778" layer="95" rot="R90">&gt;NAME</text>
 <text x="2.54" y="0" size="1.778" layer="97" rot="R270">&gt;VALUE</text>
+<wire x1="-11.43" y1="-9.144" x2="-11.43" y2="4.064" width="0.254" layer="94"/>
+<wire x1="-6.604" y1="-8.89" x2="-6.35" y2="-8.89" width="0.254" layer="94"/>
+<wire x1="-6.35" y1="-8.89" x2="-6.35" y2="4.064" width="0.254" layer="94"/>
+<wire x1="-1.524" y1="-8.89" x2="-1.27" y2="-8.89" width="0.254" layer="94"/>
+<wire x1="-1.27" y1="-8.89" x2="-1.27" y2="4.064" width="0.254" layer="94"/>
 </symbol>
 <symbol name="TXS0101">
 <pin name="VCCA" x="2.54" y="-5.08" visible="pin" length="middle" direction="pwr" rot="R90"/>
@@ -363,6 +365,21 @@ http://www.ti.com/product/TPS61232/datasheet/applications_and_implementation#SLV
 <pin name="P$1" x="0" y="-2.54" visible="pin" length="middle" direction="in" rot="R90"/>
 <pin name="P$2" x="0" y="22.86" visible="pin" length="middle" direction="out" rot="R270"/>
 <wire x1="0" y1="2.54" x2="-5.08" y2="17.78" width="0.254" layer="94"/>
+</symbol>
+<symbol name="MCR03ERTJ103">
+<description>RES SMD 10K OHM 5% 1/10W 0603
+http://www.digikey.com/product-detail/en/MCR03ERTJ103/RHM10KCGCT-ND/2796496</description>
+<wire x1="2.54" y1="0" x2="5.08" y2="2.54" width="0.254" layer="94"/>
+<wire x1="5.08" y1="2.54" x2="7.62" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="7.62" y1="-2.54" x2="10.16" y2="2.54" width="0.254" layer="94"/>
+<wire x1="10.16" y1="2.54" x2="12.7" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="12.7" y1="-2.54" x2="15.24" y2="2.54" width="0.254" layer="94"/>
+<wire x1="15.24" y1="2.54" x2="17.78" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="17.78" y1="-2.54" x2="20.32" y2="0" width="0.254" layer="94"/>
+<text x="10.16" y="7.62" size="1.27" layer="94">&gt;NAME</text>
+<text x="16.764" y="-7.112" size="1.27" layer="94" rot="R180">&gt;VALUE</text>
+<pin name="P$1" x="-2.54" y="0" visible="pin" length="middle"/>
+<pin name="P$2" x="25.4" y="0" visible="pin" length="middle" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -467,12 +484,9 @@ http://www.bourns.com/data/global/PDFs/70AAF.pdf</description>
 <devices>
 <device name="" package="70AAJ-3">
 <connects>
-<connect gate="G$1" pin="IN1" pad="GND_IN"/>
-<connect gate="G$1" pin="IN2" pad="D_IN"/>
-<connect gate="G$1" pin="IN3" pad="P_IN"/>
-<connect gate="G$1" pin="OUT1" pad="GND_OUT"/>
-<connect gate="G$1" pin="OUT2" pad="D_OUT"/>
-<connect gate="G$1" pin="OUT3" pad="P_OUT"/>
+<connect gate="G$1" pin="P$1" pad="P$1@1 P$1@2"/>
+<connect gate="G$1" pin="P$2" pad="P$2@1 P$2@2"/>
+<connect gate="G$1" pin="P$3" pad="P$3@1 P$3@3"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -541,6 +555,23 @@ http://www.ti.com/lit/ds/symlink/txs0101.pdf</description>
 <connects>
 <connect gate="G$1" pin="P$1" pad="P$1"/>
 <connect gate="G$1" pin="P$2" pad="P$3"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="MCR03ERTJ103">
+<description>Resistor SMD 10K OHM 5% 1/10W 0603</description>
+<gates>
+<gate name="G$1" symbol="MCR03ERTJ103" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="C1.6X0.8">
+<connects>
+<connect gate="G$1" pin="P$1" pad="IN"/>
+<connect gate="G$1" pin="P$2" pad="OUT"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -1058,6 +1089,7 @@ Standard 1-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <part name="JP2" library="SparkFun-Connectors" deviceset="M01" device="SMD-4.5X1.5"/>
 <part name="JP1" library="SparkFun-Connectors" deviceset="M01" device="PTH"/>
 <part name="JP5" library="SparkFun-Connectors" deviceset="M01" device="PTH"/>
+<part name="U$4" library="bret" deviceset="MCR03ERTJ103" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1074,7 +1106,7 @@ Standard 1-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <instance part="U4" gate="G$1" x="93.98" y="137.16" rot="MR0"/>
 <instance part="U1" gate="G$1" x="185.42" y="116.84"/>
 <instance part="U2" gate="G$1" x="48.26" y="139.7"/>
-<instance part="U5" gate="G$1" x="154.178" y="72.39" rot="R90"/>
+<instance part="U5" gate="G$1" x="110.998" y="72.39" rot="R90"/>
 <instance part="U$2" gate="G$1" x="-10.16" y="139.7" rot="R90"/>
 <instance part="U$1" gate="G$1" x="-63.5" y="142.24" rot="R90"/>
 <instance part="U$3" gate="G$1" x="-25.4" y="96.52"/>
@@ -1083,6 +1115,7 @@ Standard 1-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <instance part="JP2" gate="G$1" x="-48.768" y="91.186"/>
 <instance part="JP1" gate="G$1" x="134.62" y="45.72"/>
 <instance part="JP5" gate="G$1" x="134.62" y="30.48"/>
+<instance part="U$4" gate="G$1" x="10.16" y="93.98" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -1105,16 +1138,16 @@ Standard 1-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <label x="83.82" y="60.96" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="127" y1="71.12" x2="130.048" y2="71.12" width="0.1524" layer="91"/>
-<label x="114.3" y="73.66" size="1.778" layer="95"/>
-<pinref part="U5" gate="G$1" pin="OUT3"/>
-<wire x1="130.048" y1="71.12" x2="116.84" y2="71.12" width="0.1524" layer="91"/>
-<junction x="130.048" y="71.12"/>
-</segment>
-<segment>
 <wire x1="142.24" y1="45.72" x2="149.86" y2="45.72" width="0.1524" layer="91"/>
 <label x="149.86" y="48.26" size="1.778" layer="95"/>
 <pinref part="JP1" gate="G$1" pin="1"/>
+</segment>
+<segment>
+<wire x1="129.54" y1="60.96" x2="124.968" y2="60.96" width="0.1524" layer="91"/>
+<pinref part="U5" gate="G$1" pin="P$1"/>
+<wire x1="124.968" y1="60.96" x2="124.46" y2="60.96" width="0.1524" layer="91"/>
+<junction x="124.968" y="60.96"/>
+<label x="132.08" y="63.5" size="1.778" layer="95" rot="R180"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -1184,13 +1217,6 @@ Standard 1-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <label x="81.28" y="38.1" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="129.54" y1="60.96" x2="130.048" y2="60.96" width="0.1524" layer="91"/>
-<label x="114.3" y="63.5" size="1.778" layer="95"/>
-<pinref part="U5" gate="G$1" pin="OUT1"/>
-<wire x1="130.048" y1="60.96" x2="116.84" y2="60.96" width="0.1524" layer="91"/>
-<junction x="130.048" y="60.96"/>
-</segment>
-<segment>
 <wire x1="139.7" y1="30.48" x2="142.24" y2="30.48" width="0.1524" layer="91"/>
 <label x="149.86" y="38.1" size="1.778" layer="95"/>
 <pinref part="JP5" gate="G$1" pin="1"/>
@@ -1206,6 +1232,18 @@ Standard 1-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <pinref part="U$1" gate="G$1" pin="P$3"/>
 <wire x1="-63.5" y1="152.4" x2="-55.88" y2="152.4" width="0.1524" layer="91"/>
 <label x="-55.88" y="154.94" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U$3" gate="G$1" pin="P$1"/>
+<wire x1="-25.4" y1="93.98" x2="-15.24" y2="93.98" width="0.1524" layer="91"/>
+<label x="-15.24" y="96.52" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="129.54" y1="71.12" x2="124.968" y2="71.12" width="0.1524" layer="91"/>
+<pinref part="U5" gate="G$1" pin="P$3"/>
+<wire x1="124.968" y1="71.12" x2="124.46" y2="71.12" width="0.1524" layer="91"/>
+<junction x="124.968" y="71.12"/>
+<label x="132.08" y="73.66" size="1.778" layer="95" rot="R180"/>
 </segment>
 </net>
 <net name="PWR5V" class="0">
@@ -1270,7 +1308,7 @@ Standard 1-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </segment>
 <segment>
 <pinref part="U$2" gate="G$1" pin="OE"/>
-<wire x1="-33.02" y1="147.32" x2="-7.62" y2="144.78" width="0.1524" layer="91"/>
+<wire x1="-33.02" y1="147.32" x2="-40.64" y2="147.32" width="0.1524" layer="91"/>
 <label x="-40.64" y="147.32" size="1.778" layer="95"/>
 </segment>
 <segment>
@@ -1279,9 +1317,9 @@ Standard 1-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <label x="2.54" y="142.24" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$3" gate="G$1" pin="P$1"/>
-<wire x1="-25.4" y1="93.98" x2="-15.24" y2="93.98" width="0.1524" layer="91"/>
-<label x="-15.24" y="96.52" size="1.778" layer="95"/>
+<wire x1="10.16" y1="74.676" x2="10.16" y2="91.44" width="0.1524" layer="91"/>
+<label x="15.24" y="88.9" size="1.778" layer="95"/>
+<pinref part="U$4" gate="G$1" pin="P$1"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -1325,9 +1363,12 @@ Standard 1-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <segment>
 <wire x1="25.4" y1="144.78" x2="25.4" y2="119.38" width="0.1524" layer="91"/>
 <pinref part="U$3" gate="G$1" pin="P$2"/>
-<wire x1="25.4" y1="119.38" x2="-25.4" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="25.4" y1="119.38" x2="10.16" y2="119.38" width="0.1524" layer="91"/>
 <pinref part="U2" gate="G$1" pin="GPIO3"/>
+<wire x1="10.16" y1="119.38" x2="-25.4" y2="119.38" width="0.1524" layer="91"/>
 <wire x1="25.4" y1="144.78" x2="30.48" y2="144.78" width="0.1524" layer="91"/>
+<pinref part="U$4" gate="G$1" pin="P$2"/>
+<junction x="10.16" y="119.38"/>
 </segment>
 </net>
 <net name="GPIO6" class="0">
