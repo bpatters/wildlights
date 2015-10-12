@@ -32,7 +32,6 @@ typedef struct _ble_led_program_init_t {
 	ble_srv_cccd_security_mode_t    led_stream_char_attr_md;     	/**< Initial security level for led stream characteristics attribute */
 	ble_srv_cccd_security_mode_t    led_stream_sync_char_attr_md;   /**< Initial security level for led stream characteristics attribute */
 	LEDProgram                      *led_program; // led_program pointer
-	LEDStrip                        *led_strip; // strip being animated
 } ble_led_program_init_t;
 
 

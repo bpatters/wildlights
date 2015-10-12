@@ -128,7 +128,7 @@ static uint32_t ble_led_stream_sync_state_char_add(ble_led_program_t * p_led_pro
 	attr_char_value.init_len     = sizeof(uint8_t);
 	attr_char_value.init_offs    = 0;
 	attr_char_value.max_len      = sizeof(uint8_t);
-	attr_char_value.p_value      = (uint8_t *)&p_led_program->led_strip->sync;
+	attr_char_value.p_value      = (uint8_t *)&p_led_program->led_program->strips[0].sync;
 
 
 	err_code = sd_ble_gatts_characteristic_add(p_led_program->service_handle, &char_md,
@@ -295,7 +295,6 @@ uint32_t ble_led_program_init(ble_led_program_t * p_led_program, const ble_led_p
 
 	// Initialize service structure
 	p_led_program->led_program       = p_led_program_init->led_program;
-	p_led_program->led_strip         = p_led_program_init->led_strip;
 	p_led_program->conn_handle       = BLE_CONN_HANDLE_INVALID;
 
 	// Add service
