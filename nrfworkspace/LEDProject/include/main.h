@@ -27,6 +27,8 @@
 /**@brief External reference to the Battery Service. */
 extern ble_bas_t                             bas;
 
+
+
 #endif // MAIN_H__
 
 /** @} */

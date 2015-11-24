@@ -1,239 +1,289 @@
 #include "nrf_delay.h"
 #include "LEDVM.h"
 
-void readColor (uint16_t *pc, uint8_t* byteCodes, uint8_t* red, uint8_t* green, uint8_t* blue);
+void readColor(uint16_t *pc, uint8_t *byteCodes, uint8_t *red, uint8_t *green, uint8_t *blue);
+
 uint8_t readIMMU8(uint16_t *pc, uint8_t *byteCodes);
 
-void runProgram(LEDProgram* program) {
-	if (program->state != STATE_RUNNING)
-		return;
-	runSingleInstruction(program, &(program->pc), program->program);
+void runProgram(LEDProgram *program) {
+
+    if (program->state != STATE_RUNNING)
+        return;
+    runSingleInstruction(program, &(program->pc), program->program);
 }
 
-void runSingleInstruction(LEDProgram* program, uint16_t* pc, uint8_t* byteCodes) {
-	switch ((uint8_t) byteCodes[*pc]) {
-	case INST_END:
-		// don't increment PC either, we stick here in case we try to run again
-		program->state = STATE_IDLE;
-		break;
-	case INST_DELAY:
-		(*pc)++;
-		{
-			uint16_t d = byteCodes[(*pc)++];
-			d <<= 8;
-			d += byteCodes[(*pc)++];
-			trace("executed INST_DELAY %d\n", d);
-			delay(d);
-		}
-		break;
-	case INST_UPDATE:
-	 (*pc)++;
-	 {
-		 uint8_t num = readIMM8(pc, byteCodes);
-		 program->strips[num].sync = 1;
-	 }
-	 break;
-	case INST_PUSHC_I:
-		(*pc)++;
-		{
-			uint8_t stripNum = byteCodes[(*pc)++];
-			uint8_t count = byteCodes[(*pc)++];
-			uint8_t red,green,blue;
-			readColor(pc, byteCodes, &red, &green, &blue);
-			while (count-- != 0) {
-				exec_INST_ROTATEO(program, stripNum);
-				setPixelColor(&program->strips[stripNum], 0, red, green, blue);
-			}
-		}
-		break;
-	case INST_PULLC_I:
-		(*pc)++;
-		{
-			uint8_t stripNum = byteCodes[(*pc)++];
-			uint8_t count = byteCodes[(*pc)++];
-			uint8_t red,green,blue;
-			readColor(pc, byteCodes, &red, &green, &blue);
-			while (count-- != 0) {
-				exec_INST_ROTATEI(program, stripNum);
-				setPixelColor(&program->strips[stripNum], program->strips[stripNum].count-1, red, green, blue);
-			}
-		}
-		break;
-	case INST_PUSHC_LERP_I:
-			(*pc)++;
-			{
-				uint8_t stripNum = readIMM8(pc, byteCodes);
-				uint8_t count 	 = readIMM8(pc, byteCodes);
-				uint8_t sRed,sGreen,sBlue, eRed,eGreen,eBlue;
+inline uint32_t setError(LEDProgram *program, uint32_t errorCode) {
+    program->state = STATE_IDLE;
+    program->pc = errorCode;
 
-				readColor(pc, byteCodes, &sRed, &sGreen, &sBlue);
-				readColor(pc, byteCodes, &eRed, &eGreen, &eBlue);
-
-				float stepRed = (eRed - sRed) / count;
-				float stepGreen = (eGreen - sGreen) / count;
-				float stepBlue = (eBlue - sBlue) / count;
-				while (count-- != 0) {
-					exec_INST_ROTATEI(program, stripNum);
-					setPixelColor(&program->strips[stripNum], 0, sRed, sGreen, sBlue);
-					// lerp between colors
-					sRed += stepRed;
-					sGreen += stepGreen;
-					sBlue += stepBlue;
-				}
-			}
-			break;
-	case INST_PULLC_LERP_I:
-			(*pc)++;
-			{
-				uint8_t stripNum = readIMM8(pc, byteCodes);
-				uint8_t count 	 = readIMM8(pc, byteCodes);
-				uint8_t sRed,sGreen,sBlue, eRed,eGreen,eBlue;
-
-				readColor(pc, byteCodes, &sRed, &sGreen, &sBlue);
-				readColor(pc, byteCodes, &eRed, &eGreen, &eBlue);
-
-				float stepRed = (eRed - sRed) / count;
-				float stepGreen = (eGreen - sGreen) / count;
-				float stepBlue = (eBlue - sBlue) / count;
-				while (count-- != 0) {
-					exec_INST_ROTATEI(program, stripNum);
-					setPixelColor(&program->strips[stripNum], program->strips[stripNum].count-1, sRed, sGreen, sBlue);
-					// lerp between colors
-					sRed += stepRed;
-					sGreen += stepGreen;
-					sBlue += stepBlue;
-				}
-			}
-			break;
-
-	default:
-
-		error("Invalid program instruction %d\n",
-				byteCodes[*pc]);
-		program->state = STATE_IDLE;
-		break;
-	}
+    return errorCode;
 }
 
-void readColor (uint16_t *pc, uint8_t* byteCodes, uint8_t* red, uint8_t* green, uint8_t* blue) {
-	*red   = readIMMU8(pc, byteCodes);
-	*green = readIMMU8(pc, byteCodes);
-	*blue  = readIMMU8(pc, byteCodes);
+inline uint32_t decStack(LEDProgram *program) {
+    program->sp--;
+    if (program->sp <= 0) {
+        return setError(program, RC_STACK_UNDERFLOW);
+    }
+    return RC_OK;
 }
 
-float readFloat(uint16_t *pc, uint8_t* byteCodes) {
-	uint32_t value = *((uint32_t *) (&byteCodes[*pc]));
+inline uint32_t incStack(LEDProgram *program) {
+    program->sp++;
+    if (program->sp <= 0) {
+        return setError(program, RC_STACK_OVERFLOW);
+    }
 
-	value = SWAP32(value);
-	*pc += 4;
+    return RC_OK;
+}
 
-	return *((float *) (&value));;
+void runSingleInstruction(LEDProgram *program, uint16_t *pc, uint8_t *byteCodes) {
+    switch ((uint8_t) byteCodes[*pc]) {
+        case INST_END:
+            // don't increment PC either, we stick here in case we try to run again
+            program->state = STATE_IDLE;
+            break;
+        case INST_DELAY:
+            (*pc)++;
+            {
+                uint16_t d = byteCodes[(*pc)++];
+                d <<= 8;
+                d += byteCodes[(*pc)++];
+                trace("executed INST_DELAY %d\n", d);
+                delay(d);
+            }
+            break;
+        case INST_UPDATE:
+            (*pc)++;
+            {
+                uint8_t num = readIMM8(pc, byteCodes);
+                program->strips[num].sync = 1;
+            }
+            break;
+        case INST_PUSHC_I:
+            (*pc)++;
+            {
+                uint8_t stripNum = byteCodes[(*pc)++];
+                uint8_t count = byteCodes[(*pc)++];
+                uint8_t red, green, blue;
+                readColor(pc, byteCodes, &red, &green, &blue);
+                while (count-- != 0) {
+                    push_color(program, stripNum, red, green, blue);
+                }
+            }
+            break;
+        case INST_PULLC_I:
+            (*pc)++;
+            {
+                uint8_t stripNum = byteCodes[(*pc)++];
+                uint8_t count = byteCodes[(*pc)++];
+                uint8_t red, green, blue;
+                readColor(pc, byteCodes, &red, &green, &blue);
+                while (count-- != 0) {
+                    pull_color(program, stripNum, red, green, blue);
+                }
+            }
+            break;
+        case INST_PUSHC_LERP_I:
+            (*pc)++;
+            {
+                uint8_t stripNum = readIMM8(pc, byteCodes);
+                uint8_t count = readIMM8(pc, byteCodes);
+                uint8_t sRed, sGreen, sBlue, eRed, eGreen, eBlue;
+
+                readColor(pc, byteCodes, &sRed, &sGreen, &sBlue);
+                readColor(pc, byteCodes, &eRed, &eGreen, &eBlue);
+
+                float stepRed = (eRed - sRed) / count;
+                float stepGreen = (eGreen - sGreen) / count;
+                float stepBlue = (eBlue - sBlue) / count;
+                while (count-- != 0) {
+                    push_color(program, stripNum, sRed, sGreen, sBlue);
+                    setPixelColor(&program->strips[stripNum], 0, sRed, sGreen, sBlue);
+                    // lerp between colors
+                    sRed += stepRed;
+                    sGreen += stepGreen;
+                    sBlue += stepBlue;
+                }
+            }
+            break;
+        case INST_PULLC_LERP_I:
+            (*pc)++;
+            {
+                uint8_t stripNum = readIMM8(pc, byteCodes);
+                uint8_t count = readIMM8(pc, byteCodes);
+                uint8_t sRed, sGreen, sBlue, eRed, eGreen, eBlue;
+
+                readColor(pc, byteCodes, &sRed, &sGreen, &sBlue);
+                readColor(pc, byteCodes, &eRed, &eGreen, &eBlue);
+
+                float stepRed = (eRed - sRed) / count;
+                float stepGreen = (eGreen - sGreen) / count;
+                float stepBlue = (eBlue - sBlue) / count;
+                while (count-- != 0) {
+                    pull_color(program, stripNum, sRed, sGreen, sBlue);
+                    // lerp between colors
+                    sRed += stepRed;
+                    sGreen += stepGreen;
+                    sBlue += stepBlue;
+                }
+            }
+            break;
+
+        default:
+
+            error("Invalid program instruction %d\n",
+                  byteCodes[*pc]);
+            program->state = STATE_IDLE;
+            break;
+    }
+}
+
+void led_vm_set_all(LEDProgram *program, uint8_t stripNum, uint8_t red, uint8_t green, uint8_t blue) {
+    for (uint16_t pixel = 0; pixel < program->strips[stripNum].count; pixel++) {
+        setPixelColor(&program->strips[stripNum],  pixel, red, green, blue);
+    }
+}
+
+void led_vm_sync(LEDProgram *program, uint8_t stripNum) {
+    program->strips[stripNum].sync = 1;
+}
+
+/************* Animation step Functions *************************/
+void push_color(LEDProgram *program, uint8_t stripNum, uint8_t red, uint8_t green, uint8_t blue) {
+    exec_INST_ROTATEO(program, stripNum);
+    setPixelColor(&program->strips[stripNum], 0, red, green, blue);
+}
+
+void pull_color(LEDProgram *program, uint8_t stripNum, uint8_t red, uint8_t green, uint8_t blue) {
+    exec_INST_ROTATEI(program, stripNum);
+    setPixelColor(&program->strips[stripNum], program->strips[stripNum].count - 1, red, green, blue);
+}
+
+
+/************* End Animation Functions ********************/
+
+void readColor(uint16_t *pc, uint8_t *byteCodes, uint8_t *red, uint8_t *green, uint8_t *blue) {
+    *red = readIMMU8(pc, byteCodes);
+    *green = readIMMU8(pc, byteCodes);
+    *blue = readIMMU8(pc, byteCodes);
+}
+
+float readFloat(uint16_t *pc, uint8_t *byteCodes) {
+    uint32_t value = *((uint32_t * )(&byteCodes[*pc]));
+
+    value = SWAP32(value);
+    *pc += 4;
+
+    return *((float *) (&value));;
 }
 
 uint8_t readIMMU8(uint16_t *pc, uint8_t *byteCodes) {
-	return (uint8_t) byteCodes[(*pc)++];
+    return (uint8_t) byteCodes[(*pc)++];
 }
 
 int8_t readIMM8(uint16_t *pc, uint8_t *byteCodes) {
-	return (int8_t) byteCodes[(*pc)++];
+    return (int8_t) byteCodes[(*pc)++];
 }
 
-int16_t readIMM16(uint16_t *pc, uint8_t* byteCodes) {
-	int16_t value = byteCodes[(*pc)++];
-	value <<= 8;
-	value += byteCodes[(*pc)++];
+int16_t readIMM16(uint16_t *pc, uint8_t *byteCodes) {
+    int16_t value = byteCodes[(*pc)++];
+    value <<= 8;
+    value += byteCodes[(*pc)++];
 
 #ifndef BIGENDIAN
-	value = SWAP16(value);
+    value = SWAP16(value);
 #endif
 
-	return value;
+    return value;
 }
-int32_t readIMM32(uint16_t *pc, uint8_t* byteCodes) {
-	int32_t value = byteCodes[(*pc)++];
-	value <<= 8;
-	value += byteCodes[(*pc)++];
-	value <<= 8;
-	value += byteCodes[(*pc)++];
-	value <<= 8;
-	value += byteCodes[(*pc)++];
+
+int32_t readIMM32(uint16_t *pc, uint8_t *byteCodes) {
+    int32_t value = byteCodes[(*pc)++];
+    value <<= 8;
+    value += byteCodes[(*pc)++];
+    value <<= 8;
+    value += byteCodes[(*pc)++];
+    value <<= 8;
+    value += byteCodes[(*pc)++];
 
 #ifndef BIGENDIAN
-	value = SWAP32(value);
+    value = SWAP32(value);
 #endif
 
-	return value;
+    return value;
 }
 
-void setPixelColor(LEDStrip* strip, uint16_t pixel, uint8_t r, uint8_t g,
-		uint8_t b) {
-	if (strip->pixels == NULL) {
-		error("strip[%d] not initialized", ledNum);
-		return;
-	}
-	uint16_t offset = pixel * 3;
-	strip->pixels[offset] = g * strip->brightness >> 8;
-	strip->pixels[offset + 1] = r * strip->brightness >> 8;
-	strip->pixels[offset + 2] = b * strip->brightness >> 8;
+void setPixelColor(LEDStrip *strip, uint16_t pixel, uint8_t r, uint8_t g,
+                   uint8_t b) {
+    if (strip->pixels == NULL) {
+        error("strip[%d] not initialized", ledNum);
+        return;
+    }
+    uint16_t offset = pixel * 3;
+    strip->pixels[offset] = g * strip->brightness >> 8;
+    strip->pixels[offset + 1] = r * strip->brightness >> 8;
+    strip->pixels[offset + 2] = b * strip->brightness >> 8;
 }
 
-uint32_t getPixelColor(LEDStrip* strip, uint16_t pixel) {
-	uint32_t rv = 0;
+uint32_t getPixelColor(LEDStrip *strip, uint16_t pixel) {
+    uint32_t rv = 0;
 
-	uint16_t offset = pixel * 3;
-	rv = strip->pixels[offset + 1];
-	rv <<= 8;
-	rv += strip->pixels[offset];
-	rv <<= 8;
-	rv += strip->pixels[offset + 2];
+    uint16_t offset = pixel * 3;
+    rv = strip->pixels[offset + 1];
+    rv <<= 8;
+    rv += strip->pixels[offset];
+    rv <<= 8;
+    rv += strip->pixels[offset + 2];
 
-	return rv;
+    return rv;
 }
 
-void exec_INST_ROTATEO(LEDProgram* program, uint8_t stripNum) {
+void exec_INST_ROTATEO(LEDProgram *program, uint8_t stripNum) {
 
-	LEDStrip* strip = &program->strips[stripNum];
-	trace("executing INST_ROTATEO stripNum[%d]\n", stripNum);
-	uint8_t *p = strip->pixels + strip->count * 3 - 1;
-	uint8_t b = *p;
-	uint8_t r = *(p - 1);
-	uint8_t g = *(p - 2);
-	for (; p > strip->pixels + 3;) {
-		*p = *(p - 3);
-		p--;
-		*p = *(p - 3);
-		p--;
-		*p = *(p - 3);
-		p--;
-	}
+    LEDStrip *strip = &program->strips[stripNum];
+    trace("executing INST_ROTATEO stripNum[%d]\n", stripNum);
+    uint8_t *p = strip->pixels + strip->count * 3 - 1;
+    uint8_t b = *p;
+    uint8_t r = *(p - 1);
+    uint8_t g = *(p - 2);
+    for (; p > strip->pixels + 3;) {
+        *p = *(p - 3);
+        p--;
+        *p = *(p - 3);
+        p--;
+        *p = *(p - 3);
+        p--;
+    }
 
-	*strip->pixels = r;
-	*(strip->pixels + 1) = g;
-	*(strip->pixels + 2) = b;
+    *strip->pixels = r;
+    *(strip->pixels + 1) = g;
+    *(strip->pixels + 2) = b;
 }
 
-void exec_INST_ROTATEI(LEDProgram* program, uint8_t stripNum) {
+void exec_INST_ROTATEI(LEDProgram *program, uint8_t stripNum) {
 
-	LEDStrip* strip = &program->strips[stripNum];
+    LEDStrip *strip = &program->strips[stripNum];
 
-	uint8_t r = *strip->pixels;
-	uint8_t g = *(strip->pixels + 1);
-	uint8_t b = *(strip->pixels + 2);
-	trace("executing INST_ROTATEI stripNum[%d]\n", stripNum);
-	uint8_t* pend = strip->pixels + strip->count * 3;
-	uint8_t* p;
-	for (p = strip->pixels; p < pend;) {
-		*p = *(p + 3);
-		p++;
-		*p = *(p + 3);
-		p++;
-		*p = *(p + 3);
-		p++;
-	}
-	*(pend - 3) = r;
-	*(pend - 2) = g;
-	*(pend - 1) = b;
+    uint8_t r = *strip->pixels;
+    uint8_t g = *(strip->pixels + 1);
+    uint8_t b = *(strip->pixels + 2);
+    trace("executing INST_ROTATEI stripNum[%d]\n", stripNum);
+    uint8_t *pend = strip->pixels + strip->count * 3;
+    uint8_t *p;
+    for (p = strip->pixels; p < pend;) {
+        *p = *(p + 3);
+        p++;
+        *p = *(p + 3);
+        p++;
+        *p = *(p + 3);
+        p++;
+    }
+    *(pend - 3) = r;
+    *(pend - 2) = g;
+    *(pend - 1) = b;
 }
+
+
 
 /*
  void runSingleInstructionOLD(LEDProgram* program, uint16_t* pc, uint8_t* byteCodes) {

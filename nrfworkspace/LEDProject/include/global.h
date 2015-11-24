@@ -10,14 +10,20 @@
 
 #include <stdarg.h>
 #include <stdio.h>
-#define LED1_PIN 2
-#define LED2_PIN 3
+#define LED1_PIN  2
+#define POWER_PIN 3
 
-//#define DEBUG 1
-//#define DEBUG_TRACE
-#define TEST
+#define DEVICE_NAME                          "WildLights"                       	   /**< Name of device. Will be included in the advertising data. */
+#define MANUFACTURER_NAME                    "BP"                     /**< Manufacturer. Will be passed to Device Information Service. */
+#define APP_ADV_INTERVAL                     40                                        /**< The advertising interval (in units of 0.625 ms. This value corresponds to 25 ms). */
+#define APP_ADV_TIMEOUT_IN_SECONDS           180                                       /**< The advertising timeout in units of seconds. */
 
-
+#define APP_TIMER_PRESCALER                  0                                         /**< Value of the RTC1 PRESCALER register. */
+#define APP_TIMER_MAX_TIMERS                 4                                         /**< Maximum number of simultaneously created timers. */
+#define APP_TIMER_OP_QUEUE_SIZE              5                                         /**< Size of timer operation queues. */
+// number of ticks in one millisecond
+#define TICKS_PER_MILLIS          APP_TIMER_TICKS(1, APP_TIMER_PRESCALER)/**< Battery level measurement interval (ticks). */
+#define delay(x) nrf_delay_ms(x)
 
 #ifdef DEBUG_LOW
 #define error(x) debug(x)
@@ -61,6 +67,5 @@ static inline void debug(char *fmt, ... ){
 #define debuglog(...)
 #endif
 
-#define delay(x) nrf_delay_ms(x)
 
 #endif /* GLOBAL_H_ */
