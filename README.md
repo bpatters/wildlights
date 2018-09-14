@@ -11,6 +11,8 @@ This project has multiple pieces:
   - The Workspace project for the firmware for the NRF51822
 - xcode/wildlights 
   - The iOS software prototype to test the BLE connection to the board and animations.
+- Parts List
+  -  BLE_4.0_LED_Head_Unit_PartList.ods
 
 The Fusion 360 models to print the connectors and cases are not part of this project, still thinking about the best way to share
 them. 
